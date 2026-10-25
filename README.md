@@ -46,3 +46,18 @@ Measured on a Ryzen 5 3500U / Vega 8 / 6 GB RAM (Windows 11): 15.8 s load from c
    the cloud half of the weights (`cache: true` keeps them for later loads).
 
 Stop the Codespace when done; the free tier is 120 core-hours/month.
+
+## Measured results (26 Oct 2026)
+Laptop: Ryzen 5 3500U / Vega 8 (Vulkan) / 6 GB RAM, Windows 11. Remote: Azure Standard_D4s_v5
+(Central India, Ubuntu 24.04, CPU) reached through `ssh -L 50052:127.0.0.1:50052`.
+
+| Setup | Model | Split | Load | Speed |
+|---|---|---|---|---|
+| 2 servers on the laptop | Llama 3.2 1B Q4_0 | 1:1 | 15.8 s (cached) | 10.9 tok/s |
+| 2 servers in a Codespace | Qwen3 0.6B Q4 | 3:1 | 31.5 s | 15.3 tok/s |
+| Laptop client, Azure server only | Qwen3 0.6B Q4 | 1 | 157 s (first upload) | 0.8 tok/s |
+| Laptop + Azure | Qwen3 0.6B Q4 | 3:1 | 35.8 s (server cache warm) | 1.2 tok/s |
+
+Over the internet, every token waits on network round trips, so a split is only fast on a LAN.
+Laptop + Codespace through `gh codespace ports forward` crashed the client worker during load
+(0xC0000409); the same split through a plain SSH tunnel to Azure worked.
