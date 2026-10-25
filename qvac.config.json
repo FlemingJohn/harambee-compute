@@ -1,0 +1,4 @@
+{
+  "rpcServerProvider": "@qvac/sdk/ggml-rpc-server/provider",
+  "loggerLevel": "info"
+}

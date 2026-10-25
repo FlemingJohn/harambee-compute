@@ -1,0 +1,26 @@
+{
+  "name": "harambee-spike",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@qvac/asr-ggml-android-arm64": "0.10.0",
+    "@qvac/asr-ggml-ios": "0.10.0",
+    "@qvac/audiogen-ggml-android-arm64": "0.8.0",
+    "@qvac/audiogen-ggml-ios": "0.8.0",
+    "@qvac/cli": "^0.16.0",
+    "@qvac/fabric-android-arm64": "0.23.1",
+    "@qvac/fabric-ios": "0.23.1",
+    "@qvac/ggml-rpc-server": "^0.6.0",
+    "@qvac/sdk": "^0.22.0",
+    "@qvac/tts-ggml-android-arm64": "0.13.0",
+    "@qvac/tts-ggml-ios": "0.13.0"
+  }
+}

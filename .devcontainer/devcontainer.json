@@ -1,0 +1,16 @@
+{
+  "name": "harambee-rpc-node",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "24" }
+  },
+  "hostRequirements": { "cpus": 2, "memory": "8gb" },
+  "postCreateCommand": "npm ci && npx qvac bundle sdk",
+  "forwardPorts": [50052],
+  "portsAttributes": {
+    "50052": { "label": "QVAC RPC server", "onAutoForward": "silent" }
+  },
+  "customizations": {
+    "vscode": { "settings": { "remote.autoForwardPorts": false } }
+  }
+}
