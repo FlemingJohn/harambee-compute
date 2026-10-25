@@ -1,12 +1,14 @@
 // Usage: node client.mjs <topic> [howMany]
 //        node client.mjs --urls 127.0.0.1:5001,127.0.0.1:5002   (skip discovery; one device per server)
 // Discovers RPC servers on <topic>, splits a model's layers across them, and generates text.
-import {
-  discoverRpcServers, getRpcDeviceMap, loadModel, completion, unloadModel, close,
-  LLAMA_3_2_1B_INST_Q4_0
-} from '@qvac/sdk'
+// Env: MODEL=<registry constant> (default LLAMA_3_2_1B_INST_Q4_0), SPLIT=3,1 (layer share per server).
+import * as sdk from '@qvac/sdk'
+const { discoverRpcServers, getRpcDeviceMap, loadModel, completion, unloadModel, close } = sdk
 
 const [topic = 'harambee-test', howMany = '2'] = process.argv.slice(2)
+const modelName = process.env.MODEL || 'LLAMA_3_2_1B_INST_Q4_0'
+const modelSrc = sdk[modelName]
+if (!modelSrc) throw new Error(`Unknown model constant ${modelName}`)
 let modelId
 try {
   const t0 = Date.now()
@@ -26,17 +28,17 @@ try {
 
   const t1 = Date.now()
   modelId = await loadModel({
-    modelSrc: LLAMA_3_2_1B_INST_Q4_0,
+    modelSrc,
     modelConfig: {
       device: 'gpu',
       'rpc-servers': selected.map((s) => s.url).join(','),
       devices: devices.map((d) => d.alias).join(','),
       'split-mode': 'layer',
-      'tensor-split': devices.map(() => '1').join(',')
+      'tensor-split': process.env.SPLIT || devices.map(() => '1').join(',')
     },
     onProgress: (p) => process.stdout.write(`\rDOWNLOAD ${p.percentage.toFixed(0)}%   `)
   })
-  console.log(`\nLOADED ${modelId} across ${selected.length} server(s) in ${Date.now() - t1} ms`)
+  console.log(`\nLOADED ${modelName} (${modelId}) across ${selected.length} server(s) in ${Date.now() - t1} ms`)
 
   const t2 = Date.now()
   let tokens = 0
