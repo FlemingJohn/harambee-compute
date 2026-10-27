@@ -33,7 +33,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-5);
+  align-items: stretch;
+}
+
+.columns--top {
   align-items: flex-start;
+}
+
+.at-bottom {
+  margin-top: auto;
 }
 
 .column-main {
