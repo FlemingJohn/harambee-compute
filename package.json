@@ -7,7 +7,10 @@
     "typecheck": "tsc --noEmit",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "coordinator": "node src/coordinator/startCoordinator.ts",
+    "helper": "node src/helper/startHelper.ts",
+    "start": "vite build && node src/coordinator/startCoordinator.ts"
   },
   "keywords": [],
   "author": "",
@@ -28,12 +31,21 @@
     "@qvac/sdk": "^0.22.0",
     "@qvac/tts-ggml-android-arm64": "0.13.0",
     "@qvac/tts-ggml-ios": "0.13.0",
+    "@tetherto/wdk-wallet-spark": "^1.0.0-beta.30",
+    "b4a": "^1.9.0",
+    "bip39": "^3.1.0",
+    "corestore": "^7.16.1",
+    "hypercore": "^11.39.3",
+    "hyperdht": "^6.34.1",
+    "hyperswarm": "^4.17.2",
+    "qrcode": "^1.5.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "ws": "^8.22.0"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/ws": "^8.18.2",
