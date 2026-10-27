@@ -2,3 +2,4 @@ node_modules/
 qvac/
 *.log
 dist/
+.harambee/
