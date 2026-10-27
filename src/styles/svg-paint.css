@@ -1,0 +1,39 @@
+.fill-night { fill: var(--color-night); }
+.fill-dusk { fill: var(--color-dusk); }
+.fill-raised { fill: var(--color-raised); }
+.fill-line-strong { fill: var(--color-line-strong); }
+.fill-text { fill: var(--color-text); }
+.fill-muted { fill: var(--color-muted); }
+.fill-ink { fill: var(--color-ink); }
+.fill-sunset { fill: var(--color-sunset); }
+.fill-gold { fill: var(--color-gold); }
+.fill-rose { fill: var(--color-rose); }
+.fill-sage { fill: var(--color-sage); }
+.fill-sunset-tint { fill: var(--color-sunset-tint); }
+.fill-gold-tint { fill: var(--color-gold-tint); }
+.fill-rose-tint { fill: var(--color-rose-tint); }
+.fill-skin-warm { fill: var(--color-skin-warm); }
+.fill-skin-deep { fill: var(--color-skin-deep); }
+.fill-skin-brown { fill: var(--color-skin-brown); }
+.fill-none { fill: none; }
+.stroke-night { stroke: var(--color-night); }
+.stroke-dusk { stroke: var(--color-dusk); }
+.stroke-raised { stroke: var(--color-raised); }
+.stroke-line { stroke: var(--color-line); }
+.stroke-line-strong { stroke: var(--color-line-strong); }
+.stroke-text { stroke: var(--color-text); }
+.stroke-muted { stroke: var(--color-muted); }
+.stroke-ink { stroke: var(--color-ink); }
+.stroke-sunset { stroke: var(--color-sunset); }
+.stroke-gold { stroke: var(--color-gold); }
+.stroke-gold-light { stroke: var(--color-gold-light); }
+.stroke-rose { stroke: var(--color-rose); }
+.stroke-sage { stroke: var(--color-sage); }
+
+.svg-label {
+  font-family: var(--font-body);
+}
+
+.svg-number {
+  font-family: var(--font-mono);
+}
