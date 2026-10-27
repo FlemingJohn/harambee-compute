@@ -1,0 +1,37 @@
+.conversation {
+  min-height: 600px;
+}
+
+.message-student {
+  align-self: flex-end;
+  max-width: 75%;
+  padding: 14px var(--space-4);
+  border-radius: 14px 14px 4px 14px;
+  background: var(--color-line);
+}
+
+.message-pool {
+  display: flex;
+  gap: var(--space-3);
+  max-width: 88%;
+  line-height: 1.6;
+}
+
+.chat-question {
+  flex: 1 1 320px;
+}
+
+.stat-number {
+  font-family: var(--font-mono);
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: 10px;
+  background: var(--color-raised);
+}
