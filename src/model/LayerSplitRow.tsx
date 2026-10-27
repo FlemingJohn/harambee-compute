@@ -11,13 +11,13 @@ export function LayerSplitRow({ device, devicePosition, share }: { device: PoolD
     <div className={`split-row ${getDeviceClass(devicePosition)}`}>
       <span className="split-device">
         <span className="device-swatch" />
-        <strong>{device.name}</strong>
+        <span className="stack split-device-name">
+          <strong>{device.name}</strong>
+          <span className="small muted">{device.isGpu ? 'GPU, fastest' : 'CPU'} · {share.layerCount} layers</span>
+        </span>
       </span>
-      <span className="small muted">{device.isGpu ? 'GPU, fastest' : 'CPU'}</span>
-      <span className="split-usage">
-        <MemoryMeter usedShare={share.bytes / usableBytes} />
-        <span className="mono small muted">uses {formatGigabytes(share.bytes)} of {formatGigabytes(usableBytes)}</span>
-      </span>
+      <MemoryMeter usedShare={share.bytes / usableBytes} />
+      <span className="mono small muted split-usage">{formatGigabytes(share.bytes)} of {formatGigabytes(usableBytes)}</span>
     </div>
   )
 }
