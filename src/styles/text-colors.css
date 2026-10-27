@@ -1,0 +1,23 @@
+.text-sunset {
+  color: var(--color-sunset);
+}
+
+.text-gold {
+  color: var(--color-gold);
+}
+
+.text-rose {
+  color: var(--color-rose);
+}
+
+.text-sage {
+  color: var(--color-sage);
+}
+
+.text-ember {
+  color: var(--color-ember);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
