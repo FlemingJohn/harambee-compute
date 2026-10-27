@@ -1,5 +1,6 @@
 export type IconName =
   | 'advice'
+  | 'arrow'
   | 'chart'
   | 'chat'
   | 'check'
