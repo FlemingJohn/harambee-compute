@@ -21,14 +21,14 @@ export function EarningsScreen() {
   return (
     <AppScreen route="earnings">
       <div className="row-spread">
-        <ScreenTitle icon="sats" title="Earnings">
+        <ScreenTitle route="earnings" title="Earnings">
           Helpers are paid for the work their layers did, with a WDK Spark wallet.
         </ScreenTitle>
         <StatusPill tone="waiting" label="REGTEST · test sats, not real money" />
       </div>
       <EarningsSummary wallet={wallet} queuedSats={queuedSats} helperCount={earnings.filter((earning) => !earning.isCoordinator).length} />
       <EarningsTable earnings={earnings} deviceIds={deviceIds} />
-      <div className="columns">
+      <div className="columns columns--top">
         <LedgerCard entries={state?.ledger ?? sampleLedger} />
         <PayoutCard queuedSats={queuedSats} isOnline={wallet.isOnline} lastError={wallet.lastError} onSend={() => send({ type: 'send-payouts' })} />
       </div>
