@@ -65,12 +65,15 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 - [x] Split layers by free memory
 - [x] Advice for the pool
 - [x] Screens with sample data, run with `npm run dev`
-- [ ] Coordinator server and WebSocket
-- [ ] Load a model across the pool and stream answers
-- [ ] Hyperswarm pool with invite code and approval
-- [ ] Encrypted RPC through Hyperswarm
-- [ ] Recover when a device leaves
-- [ ] Work ledger
-- [ ] Spark payouts
-- [ ] Screens: landing, pool setup, devices, model, chat, earnings
-- [ ] Offline test, README, demo video
+- [x] Coordinator server and WebSocket
+- [x] Load a model across the pool and stream answers
+- [x] Hyperswarm pool with invite code and approval
+- [x] Encrypted RPC through Hyperswarm
+- [x] Recover when a device leaves
+- [x] Helpers rejoin after a coordinator restart, approved devices are remembered
+- [x] Work ledger
+- [x] Spark payouts, tested up to the network (wallet still needs REGTEST funds)
+- [x] Screens: landing, pool setup, devices, model, chat, earnings, all live
+- [ ] Two real devices on one hotspot
+- [ ] Offline test with Wi-Fi off
+- [ ] README for judges, demo video, submission
