@@ -1,5 +1,7 @@
 import type { ReactElement } from 'react'
+import { useCoordinatorConnection } from '../hooks/useCoordinatorConnection.ts'
 import { useRoute } from '../hooks/useRoute.ts'
+import { coordinatorContext } from '../lib/coordinatorContext.ts'
 import { ChatScreen } from '../screens/ChatScreen.tsx'
 import { DevicesScreen } from '../screens/DevicesScreen.tsx'
 import { EarningsScreen } from '../screens/EarningsScreen.tsx'
@@ -18,6 +20,11 @@ const screens: Record<RouteName, () => ReactElement> = {
 }
 
 export function App() {
+  const connection = useCoordinatorConnection()
   const Screen = screens[useRoute()]
-  return <Screen />
+  return (
+    <coordinatorContext.Provider value={connection}>
+      <Screen />
+    </coordinatorContext.Provider>
+  )
 }
