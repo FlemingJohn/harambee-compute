@@ -10,17 +10,19 @@ import { ModelSizeIcon } from './ModelSizeIcon.tsx'
 export function ModelOption({
   model,
   devices,
+  useEveryDevice,
   sizeTier,
   isSelected,
   onSelect
 }: {
   model: ModelChoice
   devices: PoolDevice[]
+  useEveryDevice: boolean
   sizeTier: number
   isSelected: boolean
   onSelect: () => void
 }) {
-  const verdict = getFitVerdict(allocateLayers(devices, model, reservedBytesPerDevice))
+  const verdict = getFitVerdict(allocateLayers(devices, model, reservedBytesPerDevice, useEveryDevice))
   return (
     <label className={`model-option${isSelected ? ' model-option--selected' : ''}`}>
       <input type="radio" name="model" checked={isSelected} onChange={onSelect} />
