@@ -1,4 +1,5 @@
 import { AppScreen } from '../components/AppScreen.tsx'
+import { ScreenTitle } from '../components/ScreenTitle.tsx'
 import { ChatComposer } from '../chat/ChatComposer.tsx'
 import { ChatConversation } from '../chat/ChatConversation.tsx'
 import { ChatStats } from '../chat/ChatStats.tsx'
@@ -16,6 +17,9 @@ export function ChatScreen() {
   const note = !state ? 'Sample conversation.' : isReady ? '' : 'Load a model on the Model screen, then ask here.'
   return (
     <AppScreen route="chat">
+      <ScreenTitle route="chat" title="Ask the pool">
+        Every device in the pool works on each answer. Nothing leaves this network.
+      </ScreenTitle>
       <div className="columns">
         <section aria-label="Conversation" className="card stack column-main conversation">
           <ChatConversation messages={state?.chat ?? sampleChat} modelLabel={state ? state.modelMessage : 'Qwen3 4B · sample'} note={note} />
