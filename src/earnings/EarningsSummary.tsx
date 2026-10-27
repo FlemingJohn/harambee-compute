@@ -6,7 +6,7 @@ export function EarningsSummary({ wallet, queuedSats, helperCount }: { wallet: W
   return (
     <div className="grid-auto">
       <div className="card stack">
-        <span className="label row"><Icon name="offline" size={18} />Spark network</span>
+        <span className="label row"><Icon name={wallet.isOnline ? 'hotspot' : 'offline'} size={18} />Spark network</span>
         <strong className={`card-title ${wallet.isOnline ? 'text-sage' : ''}`}>{wallet.isOnline ? 'Online' : 'Offline'}</strong>
         <span className="small muted">{wallet.isOnline ? 'Payouts can be sent now' : 'Payouts wait in the queue'}</span>
       </div>
