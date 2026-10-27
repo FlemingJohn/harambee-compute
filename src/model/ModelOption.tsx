@@ -27,13 +27,13 @@ export function ModelOption({
     <label className={`model-option${isSelected ? ' model-option--selected' : ''}`}>
       <input type="radio" name="model" checked={isSelected} onChange={onSelect} />
       <ModelSizeIcon sizeTier={sizeTier} />
-      <span className="stack model-option-text">
-        <strong>{model.name}</strong>
-        <span className="small muted">
-          needs <span className="mono">{formatGigabytes(model.requiredBytes)}</span> · <span className="mono">{model.layerCount}</span> layers
+      <span className="model-option-text">
+        <strong className="model-option-name">{model.name}</strong>
+        <span className="small muted model-option-needs">
+          Needs {formatGigabytes(model.requiredBytes)} · {model.layerCount} layers
         </span>
+        <StatusPill tone={verdict.tone} label={verdict.label} />
       </span>
-      <StatusPill tone={verdict.tone} label={verdict.label} />
     </label>
   )
 }
