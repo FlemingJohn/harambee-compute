@@ -7,9 +7,9 @@ import { pickFewestThatFit } from './pickFewestThatFit.ts'
 import { rankByUsableBytes } from './rankByUsableBytes.ts'
 import { splitLayersByWeight } from './splitLayersByWeight.ts'
 
-export function allocateLayers(devices: PoolDevice[], model: ModelChoice, reserveBytes: number): Allocation {
+export function allocateLayers(devices: PoolDevice[], model: ModelChoice, reserveBytes: number, useEveryDevice = false): Allocation {
   const ranked = rankByUsableBytes(devices, reserveBytes)
-  const chosen = pickFewestThatFit(ranked, model.requiredBytes)
+  const chosen = useEveryDevice ? ranked : pickFewestThatFit(ranked, model.requiredBytes)
   const chosenBytes = chosen.reduce((sum, entry) => sum + entry.usableBytes, 0)
   if (chosenBytes < model.requiredBytes) {
     return { shares: [], shortfallBytes: model.requiredBytes - chosenBytes, unusedDeviceIds: [] }
