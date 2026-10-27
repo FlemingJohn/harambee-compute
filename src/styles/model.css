@@ -1,0 +1,57 @@
+.model-picker {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.model-picker legend {
+  padding: 0 6px;
+}
+
+.model-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-line);
+  cursor: pointer;
+}
+
+.model-option--selected {
+  border-color: var(--color-sunset);
+  background: var(--color-raised);
+}
+
+.model-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-sunset);
+}
+
+.model-option-text {
+  flex: 1 1 auto;
+}
+
+.split-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+}
+
+.split-device {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 170px;
+}
+
+.split-usage {
+  flex: 1 1 200px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
