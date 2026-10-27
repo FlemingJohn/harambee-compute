@@ -1,28 +1,20 @@
-import { Button } from '../components/Button.tsx'
 import { Icon } from '../components/Icon.tsx'
 
-export function JoinPoolCard() {
+export function JoinPoolCard({ inviteCode }: { inviteCode: string }) {
   return (
     <section aria-labelledby="join-title" className="card stack column-side">
       <h2 id="join-title" className="card-heading">
         <Icon name="link" size={28} className="text-gold" />
-        Join a pool
+        Join from a helper
       </h2>
-      <p className="muted small">Lend this laptop's memory to a pool and earn test sats for the work it does.</p>
-      <label htmlFor="invite-code" className="small">Invite code</label>
-      <input id="invite-code" className="text-input" type="text" placeholder="HARAMBEE-XXXX-XXXX @ 192.168.x.x" />
-      <div className="row">
-        <Button variant="primary">Join pool</Button>
-        <Button>
-          <Icon name="qr" size={18} />
-          Scan QR
-        </Button>
-      </div>
+      <p className="muted small">On each helper laptop, open the project folder and run this once. It lends spare memory and earns test sats.</p>
+      <code className="command">npm run helper -- --code {inviteCode}</code>
+      <p className="muted small">Add <span className="mono">--gpu</span> if the helper has a graphics card, and <span className="mono">--name Lab-PC-07</span> to give it a name.</p>
       <div className="card card--raised stack">
-        <strong>What this laptop shares</strong>
+        <strong>What a helper shares</strong>
         <ul className="share-list">
           <li><Icon name="layers" size={20} className="text-muted" />Spare memory and GPU or CPU time, to hold part of the model.</li>
-          <li><Icon name="shield" size={20} className="text-sage" />Only the coordinator can reach it, over an encrypted link.</li>
+          <li><Icon name="shield" size={20} className="text-sage" />Only this coordinator can reach it, over an encrypted link.</li>
           <li><Icon name="wallet" size={20} className="text-gold" />Its wallet address, so the coordinator can pay it.</li>
         </ul>
       </div>
