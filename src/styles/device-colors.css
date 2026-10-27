@@ -1,0 +1,55 @@
+.device-1 {
+  --device-color: var(--color-sunset);
+}
+
+.device-2 {
+  --device-color: var(--color-gold);
+}
+
+.device-3 {
+  --device-color: var(--color-rose);
+}
+
+.device-swatch {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--device-color);
+}
+
+.layer-bar {
+  display: flex;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.layer-segment {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: var(--device-color);
+  border-right: 2px solid var(--color-dusk);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.meter {
+  display: block;
+  width: 100%;
+  min-width: 120px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-line);
+}
+
+.meter-fill {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--device-color);
+}
