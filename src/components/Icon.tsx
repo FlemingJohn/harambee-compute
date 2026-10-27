@@ -3,7 +3,8 @@ import type { IconName } from '../types/IconName.ts'
 
 const shapes: Record<IconName, ReactElement> = {
   advice: <><path d="M9 18h6M10 21h4" /><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z" /></>,
-  chart: <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />,
+  arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
+  chart:<path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />,
   chat: <><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9.5h8M8 12.5h5" /></>,
   check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
   clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
