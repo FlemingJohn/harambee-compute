@@ -1,0 +1,37 @@
+import '@fontsource/bricolage-grotesque/600.css'
+import '@fontsource/bricolage-grotesque/700.css'
+import '@fontsource/bricolage-grotesque/800.css'
+import '@fontsource/instrument-sans/400.css'
+import '@fontsource/instrument-sans/500.css'
+import '@fontsource/instrument-sans/600.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/600.css'
+import './styles/theme.css'
+import './styles/base.css'
+import './styles/layout.css'
+import './styles/text-colors.css'
+import './styles/svg-paint.css'
+import './styles/forms.css'
+import './styles/button.css'
+import './styles/pill.css'
+import './styles/card.css'
+import './styles/screen-title.css'
+import './styles/header.css'
+import './styles/device-colors.css'
+import './styles/join.css'
+import './styles/devices.css'
+import './styles/model.css'
+import './styles/chat.css'
+import './styles/earnings.css'
+import './styles/landing-layout.css'
+import './styles/hero.css'
+import './styles/landing-sections.css'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { App } from './components/App.tsx'
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+)
