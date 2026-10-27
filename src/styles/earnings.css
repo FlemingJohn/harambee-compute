@@ -12,3 +12,9 @@
   font-family: var(--font-mono);
   font-size: 14px;
 }
+
+.ledger-list {
+  max-height: 440px;
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
