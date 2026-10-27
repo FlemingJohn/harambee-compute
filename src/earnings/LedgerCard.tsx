@@ -8,9 +8,10 @@ export function LedgerCard({ entries }: { entries: LedgerEntry[] }) {
         <h2 id="ledger-title" className="card-title">Work ledger</h2>
         <span className="row small muted">
           <Icon name="shield" size={18} className="text-sage" />
-          42 entries · signed · helpers keep a copy
+          Append-only and signed · newest first
         </span>
       </div>
+      {entries.length === 0 && <p className="small muted">No work yet. Ask a question in the chat.</p>}
       <ol className="steps stack">
         {entries.map((entry) => (
           <li key={entry.sequence} className="ledger-entry">
