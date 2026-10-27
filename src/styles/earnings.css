@@ -1,3 +1,7 @@
+.wallet-address {
+  overflow-wrap: anywhere;
+}
+
 .ledger-entry {
   display: flex;
   flex-wrap: wrap;
