@@ -61,9 +61,10 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 
 ## Steps
 
-- [ ] Read device memory over RPC
-- [ ] Split layers by free memory
-- [ ] Advice for the pool
+- [x] Read device memory over RPC
+- [x] Split layers by free memory
+- [x] Advice for the pool
+- [x] Screens with sample data, run with `npm run dev`
 - [ ] Coordinator server and WebSocket
 - [ ] Load a model across the pool and stream answers
 - [ ] Hyperswarm pool with invite code and approval
