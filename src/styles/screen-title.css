@@ -1,0 +1,25 @@
+.icon-tile {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-large);
+  background: var(--color-raised);
+  border: 1px solid var(--color-line);
+}
+
+.icon-tile--small {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+}
+
+.screen-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: 40px;
+  font-weight: 700;
+}
