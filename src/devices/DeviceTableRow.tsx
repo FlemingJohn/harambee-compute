@@ -6,7 +6,7 @@ import { formatGigabytes } from '../lib/formatGigabytes.ts'
 import { getDeviceClass } from '../lib/getDeviceClass.ts'
 import type { PoolDevice } from '../types/PoolDevice.ts'
 
-export function DeviceTableRow({ device, position }: { device: PoolDevice; position: number }) {
+export function DeviceTableRow({ device, position, onRemove }: { device: PoolDevice; position: number; onRemove: () => void }) {
   const isCoordinator = position === 0
   return (
     <tr className={getDeviceClass(position)}>
@@ -33,7 +33,7 @@ export function DeviceTableRow({ device, position }: { device: PoolDevice; posit
       </td>
       <td className="mono small muted">{device.url}</td>
       <td><StatusPill tone="ready" label="Ready" /></td>
-      <td>{!isCoordinator && <Button variant="danger">Remove</Button>}</td>
+      <td>{!isCoordinator && <Button variant="danger" onClick={onRemove}>Remove</Button>}</td>
     </tr>
   )
 }
