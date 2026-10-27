@@ -10,7 +10,7 @@ export function ChatComposer({ canAsk, isAnswering, onAsk }: { canAsk: boolean; 
   }
   return (
     <form
-      className="row chat-composer"
+      className="chat-composer"
       onSubmit={(event) => {
         event.preventDefault()
         askQuestion()
