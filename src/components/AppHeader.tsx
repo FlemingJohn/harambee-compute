@@ -2,7 +2,6 @@ import { screenSteps } from '../lib/screenSteps.ts'
 import type { RouteName } from '../types/RouteName.ts'
 import { Icon } from './Icon.tsx'
 import { Logo } from './Logo.tsx'
-import { OfflineBadge } from './OfflineBadge.tsx'
 
 export function AppHeader({ currentRoute }: { currentRoute: RouteName }) {
   return (
@@ -24,7 +23,6 @@ export function AppHeader({ currentRoute }: { currentRoute: RouteName }) {
           </a>
         ))}
       </nav>
-      <OfflineBadge />
     </header>
   )
 }
