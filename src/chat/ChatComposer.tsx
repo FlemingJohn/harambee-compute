@@ -1,21 +1,35 @@
+import { useState } from 'react'
 import { Button } from '../components/Button.tsx'
-import { Icon } from '../components/Icon.tsx'
 
-export function ChatComposer() {
+export function ChatComposer({ canAsk, isAnswering, onAsk }: { canAsk: boolean; isAnswering: boolean; onAsk: (question: string) => void }) {
+  const [question, setQuestion] = useState('')
+  const askQuestion = () => {
+    if (!canAsk || isAnswering || question.trim() === '') return
+    onAsk(question.trim())
+    setQuestion('')
+  }
   return (
-    <div className="stack chat-composer">
-      <p className="card card--raised row small muted">
-        <Icon name="clock" size={18} />
-        1 question waiting in line, from a student's phone
-      </p>
-      <form className="row" onSubmit={(event) => event.preventDefault()}>
-        <div className="stack chat-question">
-          <label htmlFor="question" className="small">Your question</label>
-          <input id="question" className="text-input" type="text" placeholder="Ask anything. It stays on this network." />
-        </div>
-        <Button variant="primary" isLarge>Send</Button>
-        <Button isLarge>Stop</Button>
-      </form>
-    </div>
+    <form
+      className="row chat-composer"
+      onSubmit={(event) => {
+        event.preventDefault()
+        askQuestion()
+      }}
+    >
+      <div className="stack chat-question">
+        <label htmlFor="question" className="small">Your question</label>
+        <input
+          id="question"
+          className="text-input"
+          type="text"
+          value={question}
+          onChange={(event) => setQuestion(event.target.value)}
+          placeholder={canAsk ? 'Ask anything. It stays on this network.' : 'Load a model first'}
+        />
+      </div>
+      <Button variant="primary" isLarge isDisabled={!canAsk || isAnswering} onClick={askQuestion}>
+        {isAnswering ? 'Answering…' : 'Send'}
+      </Button>
+    </form>
   )
 }
