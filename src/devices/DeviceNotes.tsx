@@ -1,18 +1,16 @@
-import { Icon } from '../components/Icon.tsx'
+import { InfoNote } from '../components/InfoNote.tsx'
 import { formatGigabytes } from '../lib/formatGigabytes.ts'
 import { reservedBytesPerDevice } from '../pool/reservedBytesPerDevice.ts'
 
 export function DeviceNotes() {
   return (
-    <div className="columns">
-      <p className="card card--outline row column-side small muted">
-        <Icon name="layers" />
+    <div className="grid-auto">
+      <InfoNote icon="layers">
         Memory is measured by the app itself over RPC. {formatGigabytes(reservedBytesPerDevice)} stays free on each device for its own apps.
-      </p>
-      <p className="card card--outline row column-side small muted">
-        <Icon name="shield" className="text-sage" />
+      </InfoNote>
+      <InfoNote icon="shield" iconClassName="text-sage">
         Every helper is reached through an encrypted pipe that only this coordinator may open.
-      </p>
+      </InfoNote>
     </div>
   )
 }
