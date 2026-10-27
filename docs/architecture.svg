@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Architecture: a coordinator laptop and helper laptops on one phone hotspot. Helpers serve model layers through encrypted pipes. Only payouts and the first model download use the internet.">
+  <rect width="1200" height="800" rx="24" fill="#1A0B1E"/>
+
+  <rect x="28" y="28" width="1144" height="596" rx="22" fill="none" stroke="#3F6B4F" stroke-width="2" stroke-dasharray="8 8"/>
+  <g transform="translate(62 62)" fill="none" stroke="#8FD6A4" stroke-width="2.5" stroke-linecap="round">
+    <circle cx="0" cy="6" r="3" fill="#8FD6A4" stroke="none"/>
+    <path d="M-9 -3a13 13 0 0 1 18 0"/>
+    <path d="M-17 -11a25 25 0 0 1 34 0"/>
+  </g>
+  <text x="92" y="70" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#8FD6A4">Phone hotspot · works with no internet</text>
+
+  <rect x="56" y="98" width="480" height="500" rx="18" fill="#26112B" stroke="#FF8A3D" stroke-width="2"/>
+  <g transform="translate(80 118)" fill="none" stroke="#FF8A3D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="0" y="2" width="26" height="17" rx="2"/><path d="M-3 24h32"/>
+  </g>
+  <text x="120" y="138" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#FFF1E8">Coordinator laptop</text>
+  <text x="120" y="160" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" fill="#C9A3B7">the teacher · runs the model, the screens and the payer wallet</text>
+
+  <rect x="80" y="178" width="432" height="56" rx="12" fill="#321838" stroke="#5C3760"/>
+  <text x="100" y="204" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FFF1E8">Screens in the browser</text>
+  <text x="100" y="224" font-family="Consolas, Menlo, monospace" font-size="13" fill="#C9A3B7">React · http://127.0.0.1:8080</text>
+  <path d="M296 236V262" stroke="#C9A3B7" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M288 254l8 8 8-8" fill="none" stroke="#C9A3B7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="330" cy="249" r="11" fill="#FFF1E8"/>
+  <text x="330" y="254" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" fill="#2A0F1F">1</text>
+  <text x="348" y="254" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#C9A3B7">WebSocket, this laptop only</text>
+
+  <rect x="80" y="270" width="432" height="308" rx="12" fill="#321838" stroke="#5C3760"/>
+  <text x="100" y="296" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#FFF1E8">Coordinator process (Node 24)</text>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14">
+    <rect x="96" y="310" width="400" height="38" rx="9" fill="#26112B"/>
+    <circle cx="116" cy="329" r="6" fill="#FF8A3D"/>
+    <text x="132" y="334" fill="#FFF1E8"><tspan font-weight="700">QVAC client</tspan><tspan fill="#C9A3B7"> · loads the model across helpers</tspan></text>
+    <rect x="96" y="354" width="400" height="38" rx="9" fill="#26112B"/>
+    <circle cx="116" cy="373" r="6" fill="#FF8A3D"/>
+    <text x="132" y="378" fill="#FFF1E8"><tspan font-weight="700">Pool planner</tspan><tspan fill="#C9A3B7"> · free memory → layer split, advice</tspan></text>
+    <rect x="96" y="398" width="400" height="38" rx="9" fill="#26112B"/>
+    <circle cx="116" cy="417" r="6" fill="#D9558A"/>
+    <text x="132" y="422" fill="#FFF1E8"><tspan font-weight="700">Hypercore ledger</tspan><tspan fill="#C9A3B7"> · signed record of each helper's work</tspan></text>
+    <rect x="96" y="442" width="400" height="38" rx="9" fill="#26112B"/>
+    <circle cx="116" cy="461" r="6" fill="#FFD166"/>
+    <text x="132" y="466" fill="#FFF1E8"><tspan font-weight="700">WDK Spark wallet</tspan><tspan fill="#C9A3B7"> · pays helpers, REGTEST</tspan></text>
+    <rect x="96" y="486" width="400" height="38" rx="9" fill="#26112B"/>
+    <circle cx="116" cy="505" r="6" fill="#D9558A"/>
+    <text x="132" y="510" fill="#FFF1E8"><tspan font-weight="700">HyperDHT bootstrap</tspan><tspan fill="#C9A3B7"> · peers find each other offline</tspan></text>
+    <rect x="96" y="530" width="400" height="38" rx="9" fill="#26112B"/>
+    <circle cx="116" cy="549" r="6" fill="#FF8A3D"/>
+    <text x="132" y="554" fill="#FFF1E8"><tspan font-weight="700">Its own helper</tspan><tspan fill="#C9A3B7"> · this laptop holds layers too</tspan></text>
+  </g>
+
+  <g>
+    <rect x="780" y="98" width="364" height="230" rx="18" fill="#26112B" stroke="#FFD166" stroke-width="2"/>
+    <rect x="780" y="368" width="364" height="230" rx="18" fill="#26112B" stroke="#D9558A" stroke-width="2"/>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="806" y="138" font-size="22" font-weight="700" fill="#FFF1E8">Helper laptop · Lab PC</text>
+    <text x="806" y="408" font-size="22" font-weight="700" fill="#FFF1E8">Helper laptop · friend</text>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14">
+    <rect x="800" y="156" width="324" height="44" rx="9" fill="#321838"/>
+    <text x="816" y="176" font-weight="700" fill="#FFF1E8">QVAC RPC server</text>
+    <text x="816" y="193" fill="#C9A3B7">holds 10 layers · bound to 127.0.0.1 only</text>
+    <rect x="800" y="206" width="324" height="44" rx="9" fill="#321838"/>
+    <text x="816" y="226" font-weight="700" fill="#FFF1E8">Encrypted pipe server</text>
+    <text x="816" y="243" fill="#C9A3B7">opens only for the approved coordinator</text>
+    <rect x="800" y="256" width="324" height="44" rx="9" fill="#321838"/>
+    <text x="816" y="276" font-weight="700" fill="#FFF1E8">Wallet address</text>
+    <text x="816" y="293" fill="#C9A3B7">where its earned sats are paid</text>
+
+    <rect x="800" y="426" width="324" height="44" rx="9" fill="#321838"/>
+    <text x="816" y="446" font-weight="700" fill="#FFF1E8">QVAC RPC server</text>
+    <text x="816" y="463" fill="#C9A3B7">holds 6 layers · bound to 127.0.0.1 only</text>
+    <rect x="800" y="476" width="324" height="44" rx="9" fill="#321838"/>
+    <text x="816" y="496" font-weight="700" fill="#FFF1E8">Encrypted pipe server</text>
+    <text x="816" y="513" fill="#C9A3B7">opens only for the approved coordinator</text>
+    <rect x="800" y="526" width="324" height="44" rx="9" fill="#321838"/>
+    <text x="816" y="546" font-weight="700" fill="#FFF1E8">Wallet address</text>
+    <text x="816" y="563" fill="#C9A3B7">where its earned sats are paid</text>
+  </g>
+
+  <g fill="none" stroke-linecap="round">
+    <path d="M536 196C640 196 680 170 780 170" stroke="#8FD6A4" stroke-width="2.5" stroke-dasharray="6 8"/>
+    <path d="M536 330C640 330 680 228 780 228" stroke="#FFD166" stroke-width="8" opacity="0.18"/>
+    <path d="M536 330C640 330 680 228 780 228" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="2 8"/>
+    <path d="M536 360C640 360 680 498 780 498" stroke="#FFD166" stroke-width="8" opacity="0.18"/>
+    <path d="M536 360C640 360 680 498 780 498" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="2 8"/>
+    <path d="M536 226C640 226 680 440 780 440" stroke="#8FD6A4" stroke-width="2.5" stroke-dasharray="6 8"/>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13">
+    <circle cx="566" cy="126" r="11" fill="#FFF1E8"/>
+    <text x="566" y="131" text-anchor="middle" font-size="13" font-weight="800" fill="#2A0F1F">2</text>
+    <text x="584" y="122" font-weight="700" fill="#8FD6A4">Hyperswarm (green)</text>
+    <text x="584" y="140" fill="#C9A3B7">invite topic · join and approve</text>
+    <rect x="548" y="540" width="224" height="58" rx="10" fill="#1A0B1E" stroke="#5C3760"/>
+    <circle cx="568" cy="560" r="11" fill="#FFF1E8"/>
+    <text x="568" y="565" text-anchor="middle" font-size="13" font-weight="800" fill="#2A0F1F">3</text>
+    <text x="586" y="564" font-weight="700" fill="#FFD166">HyperDHT pipe (gold)</text>
+    <text x="560" y="586" fill="#C9A3B7">model layers + compute, encrypted</text>
+  </g>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="56" y="664" width="480" height="104" rx="18" fill="#26112B" stroke="#FFD166" stroke-width="1.5" stroke-dasharray="6 6"/>
+    <circle cx="86" cy="700" r="11" fill="#FFF1E8"/>
+    <text x="86" y="705" text-anchor="middle" font-size="13" font-weight="800" fill="#2A0F1F">4</text>
+    <text x="106" y="706" font-size="18" font-weight="700" fill="#FFD166">Spark network (REGTEST)</text>
+    <text x="80" y="736" font-size="14" fill="#C9A3B7">Internet, only when sending the queued payouts.</text>
+    <text x="80" y="756" font-size="14" fill="#C9A3B7">The AI never waits for it.</text>
+    <path d="M296 598V662" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="2 8" stroke-linecap="round"/>
+
+    <rect x="664" y="664" width="480" height="104" rx="18" fill="#26112B" stroke="#C9A3B7" stroke-width="1.5" stroke-dasharray="6 6"/>
+    <text x="690" y="706" font-size="18" font-weight="700" fill="#FFF1E8">QVAC model registry</text>
+    <text x="690" y="736" font-size="14" fill="#C9A3B7">Internet, only for the first download of a model.</text>
+    <text x="690" y="756" font-size="14" fill="#C9A3B7">After that it loads from the local cache.</text>
+  </g>
+  <text x="600" y="652" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#C9A3B7">OUTSIDE THE HOTSPOT · INTERNET, ONCE IN A WHILE</text>
+</svg>
