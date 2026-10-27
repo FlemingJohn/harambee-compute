@@ -12,7 +12,7 @@ export function LedgerCard({ entries }: { entries: LedgerEntry[] }) {
         </span>
       </div>
       {entries.length === 0 && <p className="small muted">No work yet. Ask a question in the chat.</p>}
-      <ol className="steps stack">
+      <ol className="steps stack ledger-list">
         {entries.map((entry) => (
           <li key={entry.sequence} className="ledger-entry">
             <span className="muted">#{entry.sequence}</span>
