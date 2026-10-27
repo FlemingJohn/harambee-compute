@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="Harambee Compute. Three old laptops. One smart AI. Zero internet.">
+  <rect width="1200" height="420" rx="24" fill="#1A0B1E"/>
+  <circle cx="955" cy="210" r="182" fill="#26112B"/>
+  <circle cx="955" cy="210" r="196" fill="none" stroke="#4A2A4E" stroke-width="1.5" stroke-dasharray="4 10"/>
+
+  <g transform="translate(64 44) scale(1.15)" fill="none">
+    <path d="M29 17.5L15.5 41.5M35 17.5L48.5 41.5M19.5 48H44.5" stroke="#5C3760" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="32" cy="12" r="7" stroke="#FF8A3D" stroke-width="3.5"/>
+    <circle cx="12" cy="48" r="7" stroke="#FFD166" stroke-width="3.5"/>
+    <circle cx="52" cy="48" r="7" stroke="#D9558A" stroke-width="3.5"/>
+    <circle cx="32" cy="35" r="5" fill="#FFD166"/>
+  </g>
+  <text x="152" y="96" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="600" fill="#FFD166" letter-spacing="2">HARAMBEE · "LET'S ALL PULL TOGETHER"</text>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <text x="64" y="180" font-size="62" font-weight="800" fill="#FFF1E8">Harambee Compute</text>
+    <text x="64" y="232" font-size="32" font-weight="700" fill="#FFF1E8">Three old laptops. One smart AI.</text>
+    <text x="64" y="272" font-size="32" font-weight="700" fill="#FF8A3D">Zero internet.</text>
+    <text x="64" y="314" font-size="19" fill="#C9A3B7">Pool the devices a school already owns into one offline AI,</text>
+    <text x="64" y="340" font-size="19" fill="#C9A3B7">and pay every helper device in sats.</text>
+  </g>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600">
+    <rect x="64" y="362" width="150" height="34" rx="17" fill="#4A2A1C"/>
+    <text x="139" y="384" text-anchor="middle" fill="#FF8A3D">QVAC · local AI</text>
+    <rect x="224" y="362" width="190" height="34" rx="17" fill="#46331F"/>
+    <text x="319" y="384" text-anchor="middle" fill="#FFD166">WDK · Spark payouts</text>
+    <rect x="424" y="362" width="200" height="34" rx="17" fill="#4A1F3A"/>
+    <text x="524" y="384" text-anchor="middle" fill="#F08AB0">Pears · encrypted P2P</text>
+  </g>
+
+  <g fill="none" stroke-linecap="round" stroke-width="2.5" stroke-dasharray="2 8">
+    <path d="M870 108C900 130 905 150 893 166" stroke="#FF8A3D"/>
+    <path d="M862 310C890 290 896 270 893 256" stroke="#FFD166"/>
+    <path d="M1050 312C1025 292 1020 272 1018 258" stroke="#D9558A"/>
+  </g>
+  <g stroke="#1A0B1E" stroke-width="2">
+    <rect x="890" y="160" width="130" height="16" rx="4" fill="#FF8A3D"/>
+    <rect x="890" y="180" width="130" height="16" rx="4" fill="#FF8A3D"/>
+    <rect x="890" y="200" width="130" height="16" rx="4" fill="#FF8A3D"/>
+    <rect x="890" y="220" width="130" height="16" rx="4" fill="#FFD166"/>
+    <rect x="890" y="240" width="130" height="16" rx="4" fill="#D9558A"/>
+  </g>
+  <text x="955" y="148" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="14" font-weight="700" fill="#FFD166">one model</text>
+
+  <g stroke-width="2.5" stroke-linejoin="round">
+    <rect x="790" y="54" width="104" height="64" rx="7" fill="#321838" stroke="#FF8A3D"/>
+    <path d="M778 122H906L898 132H786Z" fill="#321838" stroke="#FF8A3D"/>
+    <rect x="804" y="68" width="76" height="10" rx="3" fill="#FF8A3D" stroke="none"/>
+    <rect x="804" y="84" width="76" height="10" rx="3" fill="#FF8A3D" stroke="none"/>
+    <rect x="780" y="306" width="88" height="58" rx="7" fill="#321838" stroke="#FFD166"/>
+    <rect x="876" y="300" width="26" height="70" rx="5" fill="#321838" stroke="#FFD166"/>
+    <rect x="794" y="320" width="60" height="10" rx="3" fill="#FFD166" stroke="none"/>
+    <rect x="1010" y="312" width="96" height="58" rx="7" fill="#321838" stroke="#D9558A"/>
+    <path d="M998 374H1118L1110 384H1006Z" fill="#321838" stroke="#D9558A"/>
+    <rect x="1024" y="326" width="68" height="10" rx="3" fill="#D9558A" stroke="none"/>
+  </g>
+  <g transform="translate(1062 98)" fill="none" stroke="#8FD6A4" stroke-width="3" stroke-linecap="round">
+    <circle cx="0" cy="10" r="3.5" fill="#8FD6A4" stroke="none"/>
+    <path d="M-12 -2a17 17 0 0 1 24 0"/>
+    <path d="M-23 -13a33 33 0 0 1 46 0"/>
+  </g>
+  <text x="1062" y="140" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" fill="#8FD6A4">phone hotspot</text>
+</svg>
