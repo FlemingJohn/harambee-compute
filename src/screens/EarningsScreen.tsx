@@ -1,6 +1,5 @@
 import { AppScreen } from '../components/AppScreen.tsx'
 import { ScreenTitle } from '../components/ScreenTitle.tsx'
-import { StatusPill } from '../components/StatusPill.tsx'
 import { EarningsSummary } from '../earnings/EarningsSummary.tsx'
 import { EarningsTable } from '../earnings/EarningsTable.tsx'
 import { LedgerCard } from '../earnings/LedgerCard.tsx'
@@ -20,12 +19,9 @@ export function EarningsScreen() {
   const deviceIds = (state?.devices ?? sampleDevices).map((device) => device.id)
   return (
     <AppScreen route="earnings">
-      <div className="row-spread">
-        <ScreenTitle route="earnings" title="Earnings">
-          Helpers are paid for the work their layers did, with a WDK Spark wallet.
-        </ScreenTitle>
-        <StatusPill tone="waiting" label="REGTEST · test sats, not real money" />
-      </div>
+      <ScreenTitle route="earnings" title="Earnings">
+        Helpers are paid for the work their layers did, with a WDK Spark wallet.
+      </ScreenTitle>
       <EarningsSummary wallet={wallet} queuedSats={queuedSats} helperCount={earnings.filter((earning) => !earning.isCoordinator).length} />
       <EarningsTable earnings={earnings} deviceIds={deviceIds} />
       <div className="columns columns--top">
