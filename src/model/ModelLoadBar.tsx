@@ -19,21 +19,25 @@ export function ModelLoadBar({
   canLoad: boolean
   onLoad: () => void
 }) {
+  const isLoaded = status === 'ready'
   return (
-    <div className="card stack">
-      <div className="row">
-        <StatusPill tone={tones[status]} label={labels[status]} />
-        <span className="small muted">{message}</span>
-      </div>
-      <div className="row-spread">
-        <span className="small muted">The first load sends each helper its layers. After that they load from the helper's cache.</span>
+    <section aria-label="Load the model" className="card row-spread">
+      <div className="stack load-status">
         <div className="row">
-          {status === 'ready' && <Button href="#/chat">Go to chat</Button>}
-          <Button variant="primary" isLarge isDisabled={!canLoad || status === 'loading'} onClick={onLoad}>
-            {canLoad ? `Load ${modelName}` : 'Not enough memory'}
-          </Button>
+          <StatusPill tone={tones[status]} label={labels[status]} />
+          <span className="small muted">{message}</span>
         </div>
+        <span className="small muted">The first load sends each helper its layers. After that they load from the helper's cache.</span>
       </div>
-    </div>
+      <Button variant={isLoaded ? 'secondary' : 'primary'} isLarge isDisabled={!canLoad || status === 'loading'} onClick={onLoad}>
+        {getLoadLabel(modelName, canLoad, isLoaded)}
+      </Button>
+    </section>
   )
+}
+
+function getLoadLabel(modelName: string, canLoad: boolean, isLoaded: boolean): string {
+  if (!canLoad) return 'Not enough memory'
+  if (isLoaded) return 'Load again'
+  return `Load ${modelName}`
 }
