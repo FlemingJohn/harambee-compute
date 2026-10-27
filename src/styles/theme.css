@@ -1,0 +1,49 @@
+:root {
+  --color-night: #1A0B1E;
+  --color-dusk: #26112B;
+  --color-raised: #321838;
+  --color-line: #4A2A4E;
+  --color-line-strong: #5C3760;
+  --color-text: #FFF1E8;
+  --color-muted: #C9A3B7;
+  --color-ink: #2A0F1F;
+  --color-sunset: #FF8A3D;
+  --color-sunset-light: #FFB27A;
+  --color-gold: #FFD166;
+  --color-gold-light: #FFE3A3;
+  --color-rose: #D9558A;
+  --color-sage: #8FD6A4;
+  --color-ember: #FF5C5C;
+  --color-sunset-tint: #4A2A1C;
+  --color-gold-tint: #46331F;
+  --color-rose-tint: #4A1F3A;
+  --color-sage-tint: #233A2E;
+  --color-sage-line: #3F6B4F;
+  --color-ember-tint: #4D1E26;
+  --color-pending: #3A1D22;
+  --color-pending-line: #7A4A2A;
+  --color-skin-warm: #7A3B2E;
+  --color-skin-deep: #5C2E24;
+  --color-skin-brown: #6B3426;
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius-small: 8px;
+  --radius: 12px;
+  --radius-large: 16px;
+  --radius-round: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+
+  --touch-target: 44px;
+  --page-width: 1200px;
+}
