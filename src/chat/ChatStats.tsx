@@ -1,24 +1,32 @@
 import { Icon } from '../components/Icon.tsx'
 import { LayerBar } from '../components/LayerBar.tsx'
 
-export function ChatStats() {
+export function ChatStats({
+  tokensPerSecond,
+  tokenCount,
+  segments
+}: {
+  tokensPerSecond: number
+  tokenCount: number
+  segments: { label: string; layerCount: number; devicePosition: number }[]
+}) {
   return (
     <aside aria-label="Live stats" className="stack column-side">
       <section className="card stack">
-        <span className="label">Speed</span>
+        <span className="label">Speed of the last answer</span>
         <div className="row">
           <Icon name="speed" size={28} className="text-sunset" />
-          <span className="stat-number">6.2</span>
+          <span className="stat-number">{tokensPerSecond.toFixed(1)}</span>
           <span className="muted">tokens per second</span>
         </div>
-        <div className="grid-auto stat-grid">
-          <div className="stat-tile"><span className="small muted">Tokens</span><strong className="mono">184</strong></div>
-          <div className="stat-tile"><span className="small muted">Network hops</span><strong className="mono">1</strong></div>
+        <div className="grid-auto">
+          <div className="stat-tile"><span className="small muted">Tokens</span><strong className="mono">{tokenCount}</strong></div>
+          <div className="stat-tile"><span className="small muted">Network hops</span><strong className="mono">{Math.max(0, segments.length - 1)}</strong></div>
         </div>
       </section>
       <section className="card stack">
         <span className="label">Who is working</span>
-        <LayerBar segments={[{ label: 'Flem', layerCount: 21, devicePosition: 0 }, { label: 'Lab-PC', layerCount: 15, devicePosition: 1 }]} />
+        {segments.length > 0 ? <LayerBar segments={segments} /> : <span className="small muted">No model loaded</span>}
       </section>
       <p className="card card--outline row small muted">
         <Icon name="shield" className="text-sage" />
