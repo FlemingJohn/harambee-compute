@@ -21,9 +21,9 @@ npx qvac bundle sdk     # builds qvac/worker.entry.mjs with the RPC server provi
 
 ## Test 1: two servers on one machine
 ```
-node server.mjs 127.0.0.1 x 900          # terminal 1, prints SERVING 127.0.0.1:<portA>
-node server.mjs 127.0.0.1 x 900          # terminal 2, prints SERVING 127.0.0.1:<portB>
-node client.mjs --urls 127.0.0.1:<portA>,127.0.0.1:<portB>
+node spike/server.mjs 127.0.0.1 x 900          # terminal 1, prints SERVING 127.0.0.1:<portA>
+node spike/server.mjs 127.0.0.1 x 900          # terminal 2, prints SERVING 127.0.0.1:<portB>
+node spike/client.mjs --urls 127.0.0.1:<portA>,127.0.0.1:<portB>
 ```
 Measured on a Ryzen 5 3500U / Vega 8 / 6 GB RAM (Windows 11): 15.8 s load from cache, 10.9 tok/s.
 
@@ -33,13 +33,13 @@ Measured on a Ryzen 5 3500U / Vega 8 / 6 GB RAM (Windows 11): 15.8 s load from c
    `.devcontainer/` installs Node 24, runs `npm ci` and builds the worker.
 2. In the Codespace terminal:
    ```
-   node server.mjs 127.0.0.1 x 1800 50052
+   node spike/server.mjs 127.0.0.1 x 1800 50052
    ```
    VS Code forwards port 50052 to `127.0.0.1:50052` on your laptop (check the **Ports** tab).
 3. On the laptop:
    ```
-   node server.mjs 127.0.0.1 x 1800 50051
-   node client.mjs --urls 127.0.0.1:50051,127.0.0.1:50052
+   node spike/server.mjs 127.0.0.1 x 1800 50051
+   node spike/client.mjs --urls 127.0.0.1:50051,127.0.0.1:50052
    ```
    Half the layers run on the laptop and half in the cloud. Expect it to be much
    slower than Test 1: every token crosses the tunnel, and the first load uploads
