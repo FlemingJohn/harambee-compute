@@ -1,0 +1,39 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-round);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pill::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.pill--ready {
+  background: var(--color-sage-tint);
+  color: var(--color-sage);
+}
+
+.pill--waiting {
+  background: var(--color-sunset-tint);
+  color: var(--color-sunset);
+}
+
+.pill--warning {
+  background: var(--color-ember-tint);
+  color: var(--color-ember);
+}
+
+.pill--outline {
+  background: transparent;
+  border: 1px solid var(--color-sage-line);
+  color: var(--color-sage);
+}
