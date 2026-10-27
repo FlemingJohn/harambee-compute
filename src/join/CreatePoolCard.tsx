@@ -13,7 +13,7 @@ export function CreatePoolCard({ inviteCode, waitingCount }: { inviteCode: strin
       <p className="muted small">This laptop runs the model and the screens. Share the invite code with the helpers.</p>
       <div className="row">
         <InviteQrCode text={inviteCode} />
-        <div className="stack">
+        <div className="stack invite-details">
           <span className="label">Invite code</span>
           <div className="invite-code">
             <span className="invite-code-value">{secret}</span>
@@ -22,10 +22,9 @@ export function CreatePoolCard({ inviteCode, waitingCount }: { inviteCode: strin
           <Button onClick={() => void navigator.clipboard?.writeText(inviteCode)}>Copy code</Button>
         </div>
       </div>
-      <div className="row-spread">
+      <div className="card-footer row">
         {waitingCount > 0 && <span className="pill pill--waiting">{waitingCount} waiting to join</span>}
-        {waitingCount === 0 && <span className="small muted">No helpers waiting yet</span>}
-        <Button variant="primary" href="#/devices">Review devices</Button>
+        {waitingCount === 0 && <span className="small muted">No helpers waiting yet. They appear here as soon as they use the code.</span>}
       </div>
     </section>
   )
