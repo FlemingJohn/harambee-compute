@@ -1,5 +1,5 @@
 import { AppScreen } from '../components/AppScreen.tsx'
-import { Button } from '../components/Button.tsx'
+import { NextStepBar } from '../components/NextStepBar.tsx'
 import { ScreenTitle } from '../components/ScreenTitle.tsx'
 import { DeviceNotes } from '../devices/DeviceNotes.tsx'
 import { DeviceTable } from '../devices/DeviceTable.tsx'
@@ -18,7 +18,7 @@ export function DevicesScreen() {
   const shareableBytes = devices.reduce((sum, device) => sum + Math.max(0, device.freeBytes - reservedBytesPerDevice), 0)
   return (
     <AppScreen route="devices">
-      <ScreenTitle icon="devices" title="Devices in the pool">
+      <ScreenTitle route="devices" title="Devices in the pool">
         {devices.length} {devices.length === 1 ? 'device' : 'devices'} · {formatGigabytes(shareableBytes)} of memory to share
       </ScreenTitle>
       {pendingDevices.map((device) => (
@@ -31,9 +31,7 @@ export function DevicesScreen() {
       ))}
       <DeviceTable devices={devices} onRemove={(deviceId) => send({ type: 'remove-device', deviceId })} />
       <DeviceNotes />
-      <div className="row">
-        <Button variant="primary" href="#/model" isLarge>Choose a model</Button>
-      </div>
+      <NextStepBar nextRoute="model" text={`Pick a model that fits the ${formatGigabytes(shareableBytes)} the pool can share.`} />
     </AppScreen>
   )
 }
