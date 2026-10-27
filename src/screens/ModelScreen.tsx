@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AdviceList } from '../components/AdviceList.tsx'
 import { AppScreen } from '../components/AppScreen.tsx'
+import { NextStepBar } from '../components/NextStepBar.tsx'
 import { ScreenTitle } from '../components/ScreenTitle.tsx'
 import { useCoordinator } from '../hooks/useCoordinator.ts'
 import { usePoolPlan } from '../hooks/usePoolPlan.ts'
@@ -21,9 +22,11 @@ export function ModelScreen() {
   const selectedModel = models.find((model) => model.name === (pickedName ?? state?.modelName)) ?? models[2] ?? models[0]!
   const plan = usePoolPlan(devices, selectedModel, models, isSpreading)
   const shareableBytes = devices.reduce((sum, device) => sum + Math.max(0, device.freeBytes - reservedBytesPerDevice), 0)
+  const isAnyModelReady = state?.modelStatus === 'ready'
+  const nextText = isAnyModelReady ? `${state.modelName} is loaded. Ask your first question.` : 'Load a model first, then ask questions in Chat.'
   return (
     <AppScreen route="model">
-      <ScreenTitle icon="layers" title="Choose a model">
+      <ScreenTitle route="model" title="Choose a model">
         The pool has {formatGigabytes(shareableBytes)} to share. Fit is checked before anything is downloaded.
       </ScreenTitle>
       <div className="columns">
@@ -40,6 +43,7 @@ export function ModelScreen() {
           />
         </div>
       </div>
+      <NextStepBar nextRoute="chat" text={nextText} isReady={isAnyModelReady} />
     </AppScreen>
   )
 }
