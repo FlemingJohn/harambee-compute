@@ -11,7 +11,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": ["node", "vite/client"],
     "skipLibCheck": true
   },
   "include": ["src", "test"]
