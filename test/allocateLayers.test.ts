@@ -27,6 +27,13 @@ test('reports how much memory is missing when the pool is too small', () => {
   assert.equal(Math.round((allocation.shortfallBytes / gigabyte) * 10) / 10, 1.1)
 })
 
+test('spreads over every device when asked, even if one would fit', () => {
+  const devices = [makeDevice('a', 5), makeDevice('b', 5)]
+  const allocation = allocateLayers(devices, qwen4b, gigabyte, true)
+  assert.deepEqual(allocation.shares.map((share) => share.layerCount), [18, 18])
+  assert.deepEqual(allocation.unusedDeviceIds, [])
+})
+
 test('prefers the GPU device when free memory is equal', () => {
   const devices = [makeDevice('cpu', 5), makeDevice('gpu', 5, true)]
   const allocation = allocateLayers(devices, qwen4b, gigabyte)
