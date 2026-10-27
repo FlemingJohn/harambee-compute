@@ -1,9 +1,38 @@
-# Harambee Compute: RPC spike
+# Harambee Compute
 
-Splits one QVAC model's layers across several machines with QVAC RPC servers
-(`startRpcServer` / `loadModel` with `rpc-servers`). This spike proves the split
-works: laptop + laptop on loopback, or laptop + GitHub Codespace through VS Code
-port forwarding.
+Pools the devices a school already owns into one private AI on a phone hotspot,
+and pays every helper in sats with a WDK Spark wallet. See `PLAN.md`.
+
+## Run the pool
+
+Every laptop, once:
+```
+npm ci
+npx qvac bundle sdk
+```
+
+Coordinator laptop (runs the model, the screens and the payer wallet):
+```
+npm run build
+npm run coordinator -- --host <this laptop's hotspot IP> --name Flem-laptop --gpu
+```
+It prints an invite code like `HARAMBEE-6BGR-BTXL@192.168.43.10:49737` and
+serves the screens at http://127.0.0.1:8080. Add `--spread` to use every device
+even when fewer would fit.
+
+Each helper laptop:
+```
+npm run helper -- --code HARAMBEE-6BGR-BTXL@192.168.43.10:49737 --name Lab-PC-07
+```
+Approve it on the Devices screen. Approved helpers are remembered, keep the same
+identity across restarts, and rejoin by themselves if the coordinator restarts.
+
+The QVAC RPC server on each helper binds to `127.0.0.1` and is reached only
+through an encrypted HyperDHT pipe that only the approving coordinator may open.
+
+## RPC spike
+
+The first experiments that proved the layer split, kept in `spike/`.
 
 **Security:** QVAC RPC traffic is unencrypted and unauthenticated. Servers here
 bind to `127.0.0.1` only. Never open the RPC port to the internet.
