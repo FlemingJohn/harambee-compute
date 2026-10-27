@@ -16,6 +16,12 @@
   border-color: var(--color-line-strong);
 }
 
+.card-footer {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+}
+
 .card-title {
   font-size: 22px;
   font-weight: 600;
