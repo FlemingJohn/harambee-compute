@@ -1,14 +1,8 @@
+import { screenSteps } from '../lib/screenSteps.ts'
 import type { RouteName } from '../types/RouteName.ts'
+import { Icon } from './Icon.tsx'
 import { Logo } from './Logo.tsx'
 import { OfflineBadge } from './OfflineBadge.tsx'
-
-const screens: { route: RouteName; label: string }[] = [
-  { route: 'join', label: 'Pool setup' },
-  { route: 'devices', label: 'Devices' },
-  { route: 'model', label: 'Model' },
-  { route: 'chat', label: 'Chat' },
-  { route: 'earnings', label: 'Earnings' }
-]
 
 export function AppHeader({ currentRoute }: { currentRoute: RouteName }) {
   return (
@@ -18,14 +12,15 @@ export function AppHeader({ currentRoute }: { currentRoute: RouteName }) {
         Harambee Compute
       </a>
       <nav aria-label="Main" className="navigation">
-        {screens.map((screen) => (
+        {screenSteps.map((step) => (
           <a
-            key={screen.route}
-            href={`#/${screen.route}`}
-            aria-current={screen.route === currentRoute ? 'page' : undefined}
-            className={`navigation-link${screen.route === currentRoute ? ' navigation-link--current' : ''}`}
+            key={step.route}
+            href={`#/${step.route}`}
+            aria-current={step.route === currentRoute ? 'page' : undefined}
+            className={`navigation-link${step.route === currentRoute ? ' navigation-link--current' : ''}`}
           >
-            {screen.label}
+            <Icon name={step.icon} size={18} />
+            {step.label}
           </a>
         ))}
       </nav>
