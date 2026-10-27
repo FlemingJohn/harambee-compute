@@ -1,0 +1,30 @@
+.card {
+  padding: var(--space-6);
+  border-radius: var(--radius-large);
+  background: var(--color-dusk);
+  border: 1px solid var(--color-line);
+}
+
+.card--outline {
+  background: transparent;
+}
+
+.card--raised {
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  background: var(--color-raised);
+  border-color: var(--color-line-strong);
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.card-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 26px;
+  font-weight: 600;
+}
