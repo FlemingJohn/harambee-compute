@@ -1,0 +1,67 @@
+.hero {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.hero-inner {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 28px var(--space-6) 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.hero-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.hero-text {
+  flex: 1 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.hero-title {
+  font-size: 68px;
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+}
+
+.hero-lead {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--color-muted);
+}
+
+.hero-illustration {
+  flex: 1 1 440px;
+  min-width: 0;
+  max-width: 560px;
+  height: auto;
+}
+
+.harambee-tag {
+  align-self: flex-start;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-2) 14px;
+  border-radius: var(--radius-round);
+  background: var(--color-dusk);
+  border: 1px solid var(--color-line);
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 46px;
+  }
+}
