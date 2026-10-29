@@ -35,6 +35,7 @@ export function EarningsTable({ earnings, deviceIds }: { earnings: Earning[]; de
 
 function payoutStatus(earning: Earning) {
   if (earning.isCoordinator) return <span className="small muted">Coordinator</span>
+  if (earning.unconfirmedSats > 0) return <StatusPill tone="waiting" label={`Checking ${earning.unconfirmedSats} sats`} />
   if (!earning.walletAddress) return <StatusPill tone="warning" label="No address" />
   if (earning.sats > 0) return <StatusPill tone="waiting" label="Queued" />
   return <StatusPill tone="ready" label="Settled" />
