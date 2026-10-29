@@ -61,6 +61,33 @@ test('a started payout that never reached Spark is cancelled and then paid once'
   assert.equal(earningOf(runtime, 'helper')?.paidSats, 40)
 })
 
+test('two lost replies in one run cannot pay anyone twice', async () => {
+  const fake = makeFakeWallet({ isReplyLost: true })
+  const wallets = { ...helperWallets, second: { name: 'Lab-PC-3', walletAddress: helperAddress.replace('d0s', 'd2s') } }
+  const records = [workFor('helper', 40, 10), workFor('second', 40, 10)]
+  const runtime = makePayoutRuntime(fake.wallet, records, ['coordinator', 'helper', 'second'], wallets)
+  await payHelpers(runtime)
+  assert.equal(fake.sent.length, 1)
+  assert.match(runtime.store.get().payoutNotice.text, /still being checked/)
+  fake.settings.isReplyLost = false
+  await payHelpers(runtime)
+  assert.equal(fake.sent.length, 2)
+  assert.equal(earningOf(runtime, 'helper')?.paidSats, 40)
+  assert.equal(earningOf(runtime, 'second')?.paidSats, 40)
+})
+
+test('while a payout is still being checked, no new payout starts', async () => {
+  const fake = makeFakeWallet()
+  const wallets = { ...helperWallets, second: { name: 'Lab-PC-3', walletAddress: helperAddress.replace('d0s', 'd2s') } }
+  const started: LedgerRecord = { kind: 'payout-started', time: new Date().toISOString(), deviceId: 'helper', sats: 40, knownTransferIds: [] }
+  const records = [workFor('helper', 40, 10), started, workFor('second', 30, 10)]
+  const runtime = makePayoutRuntime(fake.wallet, records, ['coordinator', 'helper', 'second'], wallets)
+  await payHelpers(runtime)
+  assert.equal(fake.sent.length, 0)
+  assert.equal(earningOf(runtime, 'helper')?.unconfirmedSats, 40)
+  assert.match(runtime.store.get().payoutNotice.text, /still being checked/)
+})
+
 test('a refused payout stays owed and the reason is shown', async () => {
   const fake = makeFakeWallet({ refusal: 'Insufficient balance' })
   const runtime = makePayoutRuntime(fake.wallet, [workFor('helper', 40, 10)], bothDevices, helperWallets)
