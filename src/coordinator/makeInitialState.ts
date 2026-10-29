@@ -6,6 +6,7 @@ export function makeInitialState(inviteCode: string, isSpreading: boolean): Coor
     inviteCode,
     isSpreading,
     models: modelCatalog.map(({ name, layerCount, requiredBytes }) => ({ name, layerCount, requiredBytes })),
+    downloadedModels: [],
     devices: [],
     pendingDevices: [],
     modelName: modelCatalog[0]!.name,
