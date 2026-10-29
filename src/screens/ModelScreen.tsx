@@ -13,6 +13,8 @@ import { reservedBytesPerDevice } from '../pool/reservedBytesPerDevice.ts'
 import { sampleDevices } from '../sample/sampleDevices.ts'
 import { sampleModels } from '../sample/sampleModels.ts'
 
+const sampleDownloadedNames = ['Qwen3 0.6B']
+
 export function ModelScreen() {
   const { state, send } = useCoordinator()
   const models = state?.models ?? sampleModels
@@ -30,7 +32,7 @@ export function ModelScreen() {
         The pool has {formatGigabytes(shareableBytes)} to share. Fit is checked before anything is downloaded.
       </ScreenTitle>
       <div className="columns">
-        <ModelPicker models={models} devices={devices} useEveryDevice={isSpreading} selectedModel={selectedModel} onSelect={(model) => setPickedName(model.name)} />
+        <ModelPicker models={models} devices={devices} useEveryDevice={isSpreading} downloadedNames={state?.downloadedModels ?? sampleDownloadedNames} selectedModel={selectedModel} onSelect={(model) => setPickedName(model.name)} />
         <div className="column-main stack">
           <LayerSplitCard model={selectedModel} allocation={plan.allocation} devices={devices} />
           <AdviceList advice={plan.advice} />
