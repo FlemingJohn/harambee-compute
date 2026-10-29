@@ -3,6 +3,7 @@ import HyperDHT from 'hyperdht'
 import Hyperswarm from 'hyperswarm'
 import { randomBytes } from 'node:crypto'
 import { join } from 'node:path'
+import { listDownloadedModels } from '../inference/listDownloadedModels.ts'
 import { openLedger } from '../ledger/openLedger.ts'
 import { formatInviteCode } from '../network/formatInviteCode.ts'
 import { getPoolTopic } from '../network/getPoolTopic.ts'
@@ -44,7 +45,8 @@ const runtime: CoordinatorRuntime = {
   waiting: new Map(),
   modelId: null,
   wallet: null,
-  walletOpening: null
+  walletOpening: null,
+  walletReading: null
 }
 
 swarm.on('connection', (connection) => acceptHelper(runtime, connection))
@@ -52,6 +54,7 @@ await swarm.join(getPoolTopic(invite.secret), { server: true, client: false }).f
 await startWebServer(runtime)
 const selfHelper = startSelfHelper(options, inviteCode, runtime.selfToken)
 refreshEarnings(runtime)
+runtime.store.update({ downloadedModels: listDownloadedModels() })
 const stopWalletChecks = keepWalletFresh(runtime, walletCheckIntervalMs)
 
 console.log(`Pool ready. Invite code: ${inviteCode}`)
