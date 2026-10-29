@@ -4,6 +4,7 @@ export interface Earning {
   tokenLayers: number
   sats: number
   paidSats: number
+  unconfirmedSats: number
   walletAddress: string
   isCoordinator: boolean
 }
