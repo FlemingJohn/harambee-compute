@@ -56,7 +56,8 @@
   white-space: nowrap;
 }
 
-.model-option-needs {
+.model-option-needs,
+.model-option-download {
   white-space: nowrap;
 }
 
