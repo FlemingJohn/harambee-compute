@@ -1,12 +1,15 @@
 import { withTimeout } from '../lib/withTimeout.ts'
 import type { CoordinatorRuntime } from '../types/CoordinatorRuntime.ts'
-import { openSparkWallet } from '../wallet/openSparkWallet.ts'
+import { openWalletOnce } from './openWalletOnce.ts'
+
+const sparkTimeoutMs = 15000
+const openTimeoutMs = 30000
 
 export async function refreshWallet(runtime: CoordinatorRuntime): Promise<void> {
   try {
-    runtime.wallet ??= await withTimeout(openSparkWallet(runtime.seed), 30000, 'Spark did not answer')
-    const address = await withTimeout(runtime.wallet.getAddress(), 15000, 'Spark did not answer')
-    const balanceSats = await withTimeout(runtime.wallet.getBalanceSats(), 15000, 'Spark did not answer')
+    const wallet = runtime.wallet ?? (await withTimeout(openWalletOnce(runtime), openTimeoutMs, 'Spark did not answer'))
+    const address = await withTimeout(wallet.getAddress(), sparkTimeoutMs, 'Spark did not answer')
+    const balanceSats = await withTimeout(wallet.getBalanceSats(), sparkTimeoutMs, 'Spark did not answer')
     runtime.store.update({ wallet: { address, balanceSats, isOnline: true, lastError: '' } })
   } catch (error) {
     const wallet = runtime.store.get().wallet
