@@ -1,6 +1,9 @@
+import { findUnfinishedPayouts } from '../ledger/findUnfinishedPayouts.ts'
 import { pickPayable } from '../ledger/pickPayable.ts'
 import type { CoordinatorRuntime } from '../types/CoordinatorRuntime.ts'
 import type { Earning } from '../types/Earning.ts'
+import type { PayoutNotice } from '../types/PayoutNotice.ts'
+import type { SparkWallet } from '../types/SparkWallet.ts'
 import { isRegtestSparkAddress } from '../wallet/isRegtestSparkAddress.ts'
 import { reconcilePayouts } from './reconcilePayouts.ts'
 import { refreshEarnings } from './refreshEarnings.ts'
@@ -19,7 +22,7 @@ export async function payHelpers(runtime: CoordinatorRuntime): Promise<void> {
   }
 }
 
-async function payWhileLocked(runtime: CoordinatorRuntime): Promise<{ text: string; isError: boolean }> {
+async function payWhileLocked(runtime: CoordinatorRuntime): Promise<PayoutNotice> {
   await refreshWallet(runtime)
   const wallet = runtime.wallet
   const view = runtime.store.get().wallet
@@ -27,18 +30,31 @@ async function payWhileLocked(runtime: CoordinatorRuntime): Promise<{ text: stri
   const problems: string[] = []
   await reconcilePayouts(runtime, wallet).catch((error: Error) => problems.push(`Could not check earlier payouts: ${error.message}`))
   refreshEarnings(runtime)
-  const { payable, waitingSats } = pickPayable(runtime.store.get().earnings.filter(isPayable), view.balanceSats ?? 0)
-  if (waitingSats > 0) problems.push(`${waitingSats} sats wait: the wallet has ${view.balanceSats ?? 0} sats. Add REGTEST sats from the faucet.`)
-  let paidSats = 0
-  for (const earning of payable) {
-    const problem = await sendPayout(runtime, wallet, earning)
-    if (problem) problems.push(`${earning.deviceName}: ${problem}`)
-    else paidSats += earning.sats
-  }
+  const paidSats = findUnfinishedPayouts(runtime.ledger.getRecords()).length > 0
+    ? holdBack(problems)
+    : await payOwed(runtime, wallet, view.balanceSats ?? 0, problems)
   refreshEarnings(runtime)
   await refreshWallet(runtime)
   const paidText = paidSats > 0 ? `Paid ${paidSats} sats.` : ''
   return { text: [paidText, ...problems].filter(Boolean).join(' ') || 'Nothing to pay.', isError: problems.length > 0 }
+}
+
+async function payOwed(runtime: CoordinatorRuntime, wallet: SparkWallet, balanceSats: number, problems: string[]): Promise<number> {
+  const { payable, waitingSats } = pickPayable(runtime.store.get().earnings.filter(isPayable), balanceSats)
+  if (waitingSats > 0) problems.push(`${waitingSats} sats wait: the wallet has ${balanceSats} sats. Add REGTEST sats from the faucet.`)
+  let paidSats = 0
+  for (const earning of payable) {
+    const result = await sendPayout(runtime, wallet, earning)
+    if (result.problem) problems.push(`${earning.deviceName}: ${result.problem}`)
+    else paidSats += earning.sats
+    if (result.isUnconfirmed) return holdBack(problems, paidSats)
+  }
+  return paidSats
+}
+
+function holdBack(problems: string[], paidSats = 0): number {
+  problems.push('A payout is still being checked, so the other payouts wait until it is confirmed.')
+  return paidSats
 }
 
 function isPayable(earning: Earning): boolean {
