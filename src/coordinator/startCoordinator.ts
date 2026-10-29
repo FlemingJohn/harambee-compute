@@ -10,15 +10,17 @@ import { loadOrMakeInviteSecret } from '../network/loadOrMakeInviteSecret.ts'
 import type { CoordinatorRuntime } from '../types/CoordinatorRuntime.ts'
 import { loadOrMakeSeed } from '../wallet/loadOrMakeSeed.ts'
 import { acceptHelper } from './acceptHelper.ts'
+import { keepWalletFresh } from './keepWalletFresh.ts'
 import { makeInitialState } from './makeInitialState.ts'
 import { makeStateStore } from './makeStateStore.ts'
 import { openApprovedList } from './openApprovedList.ts'
+import { openHelperWallets } from './openHelperWallets.ts'
 import { readCoordinatorOptions } from './readCoordinatorOptions.ts'
 import { refreshEarnings } from './refreshEarnings.ts'
-import { refreshWallet } from './refreshWallet.ts'
 import { startSelfHelper } from './startSelfHelper.ts'
 import { startWebServer } from './startWebServer.ts'
 
+const walletCheckIntervalMs = 20000
 const options = readCoordinatorOptions(process.argv.slice(2))
 const bootstrapAddress = `${options.bootstrapHost}:${options.bootstrapPort}`
 const invite = { secret: loadOrMakeInviteSecret(join(options.dataPath, 'invite-secret.txt')), bootstrapAddress }
@@ -37,10 +39,12 @@ const runtime: CoordinatorRuntime = {
   selfToken: randomBytes(16).toString('hex'),
   selfDeviceId: '',
   approved: openApprovedList(join(options.dataPath, 'approved-devices.json')),
+  helperWallets: openHelperWallets(join(options.dataPath, 'helper-wallets.json')),
   helpers: new Map(),
   waiting: new Map(),
   modelId: null,
-  wallet: null
+  wallet: null,
+  walletOpening: null
 }
 
 swarm.on('connection', (connection) => acceptHelper(runtime, connection))
@@ -48,7 +52,7 @@ await swarm.join(getPoolTopic(invite.secret), { server: true, client: false }).f
 await startWebServer(runtime)
 const selfHelper = startSelfHelper(options, inviteCode, runtime.selfToken)
 refreshEarnings(runtime)
-void refreshWallet(runtime)
+const stopWalletChecks = keepWalletFresh(runtime, walletCheckIntervalMs)
 
 console.log(`Pool ready. Invite code: ${inviteCode}`)
 console.log(`Screens: http://127.0.0.1:${options.webPort}`)
@@ -59,6 +63,7 @@ process.once('SIGTERM', stopCoordinator)
 
 async function stopCoordinator(): Promise<void> {
   selfHelper.kill('SIGTERM')
+  stopWalletChecks()
   runtime.wallet?.dispose()
   await swarm.destroy()
   await bootstrapNode.destroy()
