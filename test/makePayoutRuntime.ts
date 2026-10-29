@@ -24,7 +24,10 @@ export function makePayoutRuntime(wallet: SparkWallet, records: LedgerRecord[], 
       entries: () => [...helperWallets.entries()]
     },
     wallet,
-    walletOpening: null
+    walletOpening: null,
+    walletReading: null,
+    options: { useEveryDevice: true },
+    modelId: null
   }
   return runtime as unknown as CoordinatorRuntime
 }
