@@ -169,6 +169,8 @@ npm run helper -- --code HARAMBEE-6BGR-BTXL@192.168.43.10:49737 --name Lab-PC-07
 ```
 Then press **Approve** on the Devices screen, pick a model on the Model screen, and ask in Chat.
 
+If a helper keeps saying "Looking for the pool", run `npm run check -- --code <the invite code>` on it. It tests the three steps a helper needs (reach the bootstrap, find the coordinator, open the encrypted connection) and says which one fails.
+
 | Option | Where | What it does |
 |---|---|---|
 | `--host` | coordinator | the IP helpers use to reach the coordinator |
