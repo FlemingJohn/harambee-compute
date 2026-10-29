@@ -13,6 +13,7 @@ export interface CoordinatorState {
   inviteCode: string
   isSpreading: boolean
   models: ModelChoice[]
+  downloadedModels: string[]
   devices: PoolDevice[]
   pendingDevices: PendingDevice[]
   modelName: string
