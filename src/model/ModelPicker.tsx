@@ -6,12 +6,14 @@ export function ModelPicker({
   models,
   devices,
   useEveryDevice,
+  downloadedNames,
   selectedModel,
   onSelect
 }: {
   models: ModelChoice[]
   devices: PoolDevice[]
   useEveryDevice: boolean
+  downloadedNames: string[]
   selectedModel: ModelChoice
   onSelect: (model: ModelChoice) => void
 }) {
@@ -25,6 +27,7 @@ export function ModelPicker({
           devices={devices}
           useEveryDevice={useEveryDevice}
           sizeTier={position + 1}
+          isDownloaded={downloadedNames.includes(model.name)}
           isSelected={model.name === selectedModel.name}
           onSelect={() => onSelect(model)}
         />
