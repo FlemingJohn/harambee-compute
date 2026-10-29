@@ -12,6 +12,7 @@ export function ModelOption({
   devices,
   useEveryDevice,
   sizeTier,
+  isDownloaded,
   isSelected,
   onSelect
 }: {
@@ -19,6 +20,7 @@ export function ModelOption({
   devices: PoolDevice[]
   useEveryDevice: boolean
   sizeTier: number
+  isDownloaded: boolean
   isSelected: boolean
   onSelect: () => void
 }) {
@@ -31,6 +33,9 @@ export function ModelOption({
         <strong className="model-option-name">{model.name}</strong>
         <span className="small muted model-option-needs">
           Needs {formatGigabytes(model.requiredBytes)} · {model.layerCount} layers
+        </span>
+        <span className={`small model-option-download ${isDownloaded ? 'text-sage' : 'muted'}`}>
+          {isDownloaded ? 'Downloaded · works offline' : 'Not downloaded yet'}
         </span>
         <StatusPill tone={verdict.tone} label={verdict.label} />
       </span>
