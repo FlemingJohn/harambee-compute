@@ -47,11 +47,13 @@ Harambee Compute splits **one bigger model** across the devices in the room. Eac
 
 ## Proof, measured
 
-All numbers come from real runs on 25 to 27 October 2026.
+All numbers come from real runs on 25 to 29 October 2026.
 
 | What we ran | Result |
 |---|---|
-| Qwen3 0.6B split 14 / 14 across two helpers, **through the encrypted pipes** | loaded in **30 to 32 s**, answered at **5.9 to 7.0 tokens/s** |
+| **Two real laptops** on one Wi-Fi, Qwen3 0.6B split **13 / 15** by free memory (the second laptop: 5.1 GB free, CPU only) | loaded in **104 s** the first time (layers sent over Wi-Fi), answered correctly at **3.7 tokens/s** |
+| **A real Spark payout**, coordinator wallet → helper wallet on REGTEST | **33 sats** paid in **7.4 s**, **no fee**, final on Spark. Pressing Send twice at once still paid **once** |
+| Qwen3 0.6B split 14 / 14 across two helpers on one laptop, **through the encrypted pipes** | loaded in **30 to 32 s**, answered at **5.9 to 7.0 tokens/s** |
 | Llama 3.2 1B split across two QVAC RPC servers on one laptop | **10.9 tokens/s** |
 | A helper left while holding half the model | noticed in **13 s**, model reloaded on the device left, next question answered |
 | The coordinator restarted | the helper rejoined in **about 60 s** and was approved again on its own |
@@ -61,15 +63,16 @@ All numbers come from real runs on 25 to 27 October 2026.
 ## Architecture
 
 <p align="center">
-  <img src="docs/architecture.svg" alt="Architecture: coordinator and helpers on one hotspot, connected by Hyperswarm and encrypted HyperDHT pipes" width="100%">
+  <img src="docs/architecture.svg" alt="Architecture: a teacher laptop and two helper laptops on one phone hotspot with the internet off. Helpers join with Hyperswarm, layers and tokens travel through encrypted HyperDHT pipes, work goes into a Hypercore ledger, and helpers are paid with WDK Spark when the internet is back." width="100%">
 </p>
 
 | Link | Carries | Needs internet? |
 |---|---|---|
-| ① WebSocket | the screens ↔ the coordinator, on `127.0.0.1` only, with an origin check | No |
-| ② Hyperswarm | join requests on a secret topic made from the invite code | No, the coordinator runs its own HyperDHT bootstrap |
-| ③ HyperDHT pipe | model layers and compute, end to end encrypted | No |
-| ④ Spark | payouts to helpers | **Yes**, only when sending |
+| Hyperswarm | join requests on a secret topic made from the invite code | No, the coordinator runs its own HyperDHT bootstrap |
+| HyperDHT pipe | model layers out to each helper, then every token through every helper, end to end encrypted | No |
+| WebSocket | the screens ↔ the coordinator, on `127.0.0.1` only, with an origin check | No |
+| Spark | payouts from the coordinator wallet to each helper wallet | **Yes**, only when paying |
+| QVAC registry | the model file, the first time it is used | **Yes**, once per model |
 
 **Security in one line:** the QVAC RPC server on every helper listens on `127.0.0.1` only. The only way in is an encrypted HyperDHT pipe whose firewall accepts just the coordinator that approved it.
 
@@ -77,9 +80,9 @@ All numbers come from real runs on 25 to 27 October 2026.
 
 | Works offline | Needs the internet |
 |---|---|
-| Every AI answer | Downloading a model the first time (QVAC registry) |
+| Every AI answer | Downloading a model the first time (QVAC registry). The Model screen shows which models are already downloaded |
 | Finding devices and splitting the model | Sending payouts and reading the wallet balance (Spark) |
-| Encrypted links between devices | Installing the app (`npm ci`) |
+| Encrypted links between devices | Installing the app (`npm ci`) and claiming faucet test sats (`npm run fund`) |
 | The signed work ledger | |
 
 ## Tech stack
@@ -102,12 +105,22 @@ All numbers come from real runs on 25 to 27 October 2026.
 - `loadModel` gets every helper as `rpc-servers` with `split-mode: layer` and a `tensor-split` from the planner → [`src/inference/loadPoolModel.ts`](src/inference/loadPoolModel.ts)
 - `completion` streams the answer → [`src/inference/streamAnswer.ts`](src/inference/streamAnswer.ts)
 - The worker is built with the RPC provider from [`qvac.config.json`](qvac.config.json) using `npx qvac bundle sdk`
-- Models come from the QVAC registry: [`src/inference/modelCatalog.ts`](src/inference/modelCatalog.ts)
+- Models come from the QVAC registry: [`src/inference/modelCatalog.ts`](src/inference/modelCatalog.ts). The coordinator checks the QVAC cache so the Model screen can say which models work offline → [`src/inference/listDownloadedModels.ts`](src/inference/listDownloadedModels.ts)
+- A load that loses a device or takes over 15 minutes ends with a clear message instead of hanging → [`src/coordinator/loadModelOnPool.ts`](src/coordinator/loadModelOnPool.ts)
 
 ### WDK: paying the helpers
 - Every device makes a BIP-39 seed once and a Spark REGTEST account → [`src/wallet/openSparkWallet.ts`](src/wallet/openSparkWallet.ts)
 - Helpers send their Spark address when they join → [`src/wallet/readWalletAddress.ts`](src/wallet/readWalletAddress.ts)
-- The coordinator pays what the ledger says is owed with `sendTransaction`, and writes each payout back to the ledger so a retry never pays twice → [`src/coordinator/payHelpers.ts`](src/coordinator/payHelpers.ts)
+- The coordinator pays what the ledger says is owed with `sendTransaction` → [`src/coordinator/payHelpers.ts`](src/coordinator/payHelpers.ts)
+- **Payout safety**, each case covered by a test in [`test/payHelpers.test.ts`](test/payHelpers.test.ts):
+  - a double press runs one payout at a time;
+  - every payout is written to the ledger **before** and **after** it is sent → [`src/coordinator/sendPayout.ts`](src/coordinator/sendPayout.ts);
+  - the wallet uses the WDK's `syncAndRetry`, and a payout whose reply was lost, even across a crash, is settled from the Spark transfer history instead of being sent again → [`src/coordinator/reconcilePayouts.ts`](src/coordinator/reconcilePayouts.ts);
+  - while one payout is being checked, no new payout starts;
+  - only what the balance covers is paid, and only to REGTEST `sparkrt1…` addresses → [`src/wallet/isRegtestSparkAddress.ts`](src/wallet/isRegtestSparkAddress.ts);
+  - a helper that has left can still be paid, because its wallet is remembered → [`src/coordinator/openHelperWallets.ts`](src/coordinator/openHelperWallets.ts);
+  - the wallet status is checked every 20 s, so the Earnings screen shows Offline by itself → [`src/coordinator/keepWalletFresh.ts`](src/coordinator/keepWalletFresh.ts)
+- Test sats come from the faucet: `npm run fund` prints the deposit address and claims the deposit → [`src/wallet/fundWallet.ts`](src/wallet/fundWallet.ts)
 - Rate: 1 sat for every 10 token-layers a helper computes → [`src/ledger/summarizeEarnings.ts`](src/ledger/summarizeEarnings.ts)
 
 ### Pears: finding devices and keeping a record
@@ -173,15 +186,16 @@ It prints the coordinator wallet's REGTEST deposit address. Paste it at the [Lig
 
 | | |
 |---|---|
-| **Tested on** | Windows 11 Home, AMD Ryzen 5 3500U, Radeon Vega 8 (Vulkan), 6 GB RAM, Node 24.13.1 |
+| **Tested on** | Windows 11 Home, AMD Ryzen 5 3500U, Radeon Vega 8 (Vulkan), 6 GB RAM, Node 24.13.1 (coordinator) |
+| **Second laptop** | Windows, CPU only, 5.9 GB of memory seen by QVAC (helper) |
 | **Model used in the tests** | Qwen3 0.6B Q4 (`QWEN3_600M_INST_Q4`), 382 MB, 28 layers |
-| **Memory per device** | split 14 / 14, each device holds half the layers. The planner keeps 1 GB free on every device for its own apps |
+| **Memory per device** | Qwen3 0.6B split 13 / 15 across the two laptops, about 0.2 GB each. The planner keeps 1 GB free on every device for its own apps |
 | **Bigger models in the catalog** | Qwen3 1.7B (1.06 GB), Qwen3 4B (2.5 GB), Qwen3 8B (5.0 GB) |
 | **Model licences** | Qwen3: Apache 2.0. Llama 3.2 1B, used only in `spike/`: Llama 3.2 Community License |
 
 ## Built during the event
 
-Everything in `src/`, `test/`, `docs/` and `spike/` was written between 25 and 29 October 2026 for this hackathon.
+Everything in `src/`, `test/`, `docs/` and `spike/` was written between 25 and 30 October 2026 for this hackathon.
 
 Pre-existing, third-party work we build on: QVAC SDK and RPC server (Apache 2.0), WDK Spark wallet (Apache 2.0), Hyperswarm, HyperDHT, Hypercore and Corestore (MIT), React, Vite, `ws` and `qrcode` (MIT), `bip39` (ISC), and the Bricolage Grotesque, Instrument Sans and JetBrains Mono fonts (OFL 1.1), bundled so the screens work offline.
 
@@ -189,7 +203,7 @@ Pre-existing, third-party work we build on: QVAC SDK and RPC server (Apache 2.0)
 
 - A split is **slower** than one device. It wins on model size, not speed, so the planner uses the fewest devices that fit.
 - Helpers need the app installed. Students chatting from a phone browser is next on the list.
-- Payouts need REGTEST test sats in the coordinator wallet. Without them the payout is refused and stays queued, as tested.
+- Payouts use REGTEST test sats from the faucet (`npm run fund`), never real money. A Spark payment completes when the helper's wallet is next online and claims it.
 - A helper's answers cannot be verified, so only approve devices you trust.
 - Use the coordinator wallet only for Harambee payouts. A payout that lost its reply is matched against the wallet's own transfer history, so payments made from the same wallet in another app could confuse that check.
 - Each laptop's wallet seed lives in `.harambee/…/seed.txt`. Back it up before using real money; deleting the folder loses the wallet.
