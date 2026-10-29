@@ -4,6 +4,7 @@ import type { ApprovedList } from './ApprovedList.ts'
 import type { ConnectedHelper } from './ConnectedHelper.ts'
 import type { CoordinatorOptions } from './CoordinatorOptions.ts'
 import type { HelperHello } from './HelperHello.ts'
+import type { HelperWallets } from './HelperWallets.ts'
 import type { LedgerHandle } from './LedgerHandle.ts'
 import type { SparkWallet } from './SparkWallet.ts'
 import type { StateStore } from './StateStore.ts'
@@ -17,8 +18,10 @@ export interface CoordinatorRuntime {
   selfToken: string
   selfDeviceId: string
   approved: ApprovedList
+  helperWallets: HelperWallets
   helpers: Map<string, ConnectedHelper>
   waiting: Map<string, { hello: HelperHello; connection: SwarmConnection }>
   modelId: string | null
   wallet: SparkWallet | null
+  walletOpening: Promise<SparkWallet> | null
 }
