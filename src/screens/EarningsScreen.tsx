@@ -10,6 +10,7 @@ import { sampleEarnings } from '../sample/sampleEarnings.ts'
 import { sampleLedger } from '../sample/sampleLedger.ts'
 
 const sampleWallet = { address: '', balanceSats: 50000, isOnline: false, lastError: '' }
+const sampleNotice = { text: '', isError: false }
 
 export function EarningsScreen() {
   const { state, send } = useCoordinator()
@@ -26,7 +27,7 @@ export function EarningsScreen() {
       <EarningsTable earnings={earnings} deviceIds={deviceIds} />
       <div className="columns columns--top">
         <LedgerCard entries={state?.ledger ?? sampleLedger} />
-        <PayoutCard queuedSats={queuedSats} isOnline={wallet.isOnline} lastError={wallet.lastError} onSend={() => send({ type: 'send-payouts' })} />
+        <PayoutCard queuedSats={queuedSats} isOnline={wallet.isOnline} isPaying={state?.isPaying ?? false} notice={state?.payoutNotice ?? sampleNotice} onSend={() => send({ type: 'send-payouts' })} />
       </div>
     </AppScreen>
   )
