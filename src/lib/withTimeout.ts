@@ -1,6 +1,8 @@
+import { TimeoutError } from './TimeoutError.ts'
+
 export function withTimeout<Result>(work: Promise<Result>, timeoutMs: number, message: string): Promise<Result> {
   return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error(message)), timeoutMs)
+    const timer = setTimeout(() => reject(new TimeoutError(message)), timeoutMs)
     work.then(
       (result) => {
         clearTimeout(timer)
