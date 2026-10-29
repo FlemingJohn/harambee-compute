@@ -129,16 +129,20 @@ All numbers come from real runs on 25 to 29 October 2026.
 - RPC travels through an **encrypted HyperDHT pipe** with a firewall → [`src/network/startRpcPipeServer.ts`](src/network/startRpcPipeServer.ts), [`src/network/startRpcPipeClient.ts`](src/network/startRpcPipeClient.ts)
 - Every answer's work goes into an append-only, signed **Hypercore** → [`src/ledger/openLedger.ts`](src/ledger/openLedger.ts)
 
-## A real day with Harambee
+## Real-time use cases
 
-> **08:00** Mwalimu Wanjiru turns on her phone hotspot with mobile data **off** and starts the coordinator on her laptop.
-> **08:05** Three lab PCs start the helper with the code on the board. She taps **Approve** three times.
-> **08:07** The Model screen says Qwen3 4B needs the pool and suggests leaving out the slowest PC. She loads it.
-> **08:10** Her Form 2 class asks about photosynthesis. Answers stream in, made by four machines together, and nothing leaves the room.
-> **10:40** One PC is switched off. The pool notices, reloads on the other three, and the lesson goes on.
-> **16:30** Back on Wi-Fi, she presses **Send payouts**. Each PC owner is paid in sats for the work their machine did, as written in the ledger.
+<p align="center">
+  <img src="docs/use-cases.svg" alt="Four live use cases: a school lab with no data bundle, idle PCs that earn after closing, a lesson that keeps going when a PC switches off, and a study group that runs a bigger model" width="100%">
+</p>
 
-The names are an example. The steps are what the app does today.
+| Use case | Who | What happens, live | What does the work |
+|---|---|---|---|
+| **School lab, data bundle finished** | a teacher and the lab PCs | Students ask questions during the lesson. Answers stream from all the PCs together, and nothing leaves the room. | QVAC splits one model across the PCs; Pears pipes carry the layers and tokens, encrypted |
+| **Idle PCs earn after closing** | a cyber café or library owner | Their PCs lend memory to the pool. The owner is paid in sats for exactly the work the PCs did. | Hypercore ledger counts tokens × layers; WDK Spark pays with no fee |
+| **The lesson keeps going** | any class | The internet drops, or a PC is switched off. The pool notices in 13 s (measured) and reloads on the PCs that are left. | QVAC reload; helpers rejoin through Hyperswarm and are approved again on their own |
+| **A study group runs a smarter model** | friends with laptops | Together they hold a model none of them could run alone. The Model screen says when one more laptop unlocks a bigger one. | QVAC RPC reads real free memory; the planner gives advice and the `tensor-split` |
+
+These are the situations Harambee is built for. Every step in them is something the app does today.
 
 ## Setup
 
