@@ -18,6 +18,8 @@ export function makeInitialState(inviteCode: string, isSpreading: boolean): Coor
     tokenCount: 0,
     earnings: [],
     ledger: [],
-    wallet: { address: '', balanceSats: null, isOnline: false, lastError: '' }
+    wallet: { address: '', balanceSats: null, isOnline: false, lastError: '' },
+    isPaying: false,
+    payoutNotice: { text: '', isError: false }
   }
 }
