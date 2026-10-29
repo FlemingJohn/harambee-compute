@@ -11,6 +11,7 @@
     "coordinator": "node src/coordinator/startCoordinator.ts",
     "helper": "node src/helper/startHelper.ts",
     "fund": "node src/wallet/fundWallet.ts",
+    "check": "node src/network/checkPoolConnection.ts",
     "start": "vite build && node src/coordinator/startCoordinator.ts"
   },
   "keywords": [],
