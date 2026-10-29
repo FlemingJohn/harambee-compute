@@ -24,6 +24,8 @@ declare module 'hyperdht' {
     static keyPair(seed?: Buffer): KeyPair
     static bootstrapper(port: number, host: string): HyperDHT
     ready(): Promise<void>
+    toArray(): { host: string; port: number }[]
+    lookup(target: Buffer): AsyncIterable<{ from: { host: string; port: number }; peers: { publicKey: Buffer }[] }>
     connect(publicKey: Buffer, options?: { keyPair?: KeyPair }): EncryptedStream
     createServer(options: ServerOptions, onConnection: (stream: EncryptedStream) => void): DhtServer
     destroy(): Promise<void>
