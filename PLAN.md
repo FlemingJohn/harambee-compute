@@ -10,7 +10,8 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 
 - **Coordinator**: runs the model, the screens and the wallet that pays.
 - **Helper**: lends its memory and compute by running a QVAC RPC server.
-- **Student**: asks questions from a phone browser. Installs nothing.
+- **Student**: asks questions on the coordinator's Chat screen. Asking from a
+  phone browser is planned, not built.
 
 ## How a pool works
 
@@ -29,7 +30,7 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 ## Needs the internet
 
 - Downloading a model the first time.
-- Sending payouts on Spark REGTEST.
+- Sending payouts and claiming faucet sats on Spark REGTEST.
 
 ## Stack
 
@@ -45,9 +46,14 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 ## Folders
 
 - `src/types` one type per file
-- `src/pool` finding devices, reading their memory, splitting layers, advice
-- `src/server` the coordinator process and its WebSocket
-- `src/components`, `src/hooks`, `src/styles` the screens
+- `src/coordinator` the coordinator process: approval, loading, answers, payouts
+- `src/helper` the helper process
+- `src/network` invite codes, Hyperswarm and the encrypted RPC pipe
+- `src/pool` reading device memory, splitting layers, advice
+- `src/inference` the model catalog, loading and streaming answers
+- `src/ledger` work records and earnings
+- `src/wallet` Spark wallets, address checks and the faucet script
+- `src/screens`, `src/components`, `src/hooks`, `src/styles` and one folder per screen area
 - `test` unit tests, run with `npm test`
 - `spike` the first experiments with RPC servers
 
@@ -58,6 +64,8 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 | Two servers on one laptop, Llama 3.2 1B | 15.8 s | 10.9 tok/s |
 | Two servers on one Linux machine, Qwen3 0.6B | 31.5 s | 15.3 tok/s |
 | Laptop and a far cloud server, Qwen3 0.6B | 35.8 s cached | 1.2 tok/s |
+| Two real laptops on one Wi-Fi, Qwen3 0.6B split 13 / 15 | 104 s first load | 3.7 tok/s |
+| Real Spark REGTEST payout, coordinator to helper | 7.4 s | 33 sats, no fee |
 
 ## Steps
 
@@ -72,8 +80,11 @@ Deadline: Friday 30 October 2026, 14:00 UTC.
 - [x] Recover when a device leaves
 - [x] Helpers rejoin after a coordinator restart, approved devices are remembered
 - [x] Work ledger
-- [x] Spark payouts, tested up to the network (wallet still needs REGTEST funds)
+- [x] Spark payouts, safe against double presses, lost replies and crashes
+- [x] A real Spark payout from the coordinator to a helper
 - [x] Screens: landing, pool setup, devices, model, chat, earnings, all live
-- [ ] Two real devices on one hotspot
-- [ ] Offline test with Wi-Fi off
-- [ ] README for judges, demo video, submission
+- [x] Two real devices on one network
+- [x] README for judges
+- [ ] Offline test with the internet off
+- [ ] Demo video
+- [ ] DoraHacks submission
