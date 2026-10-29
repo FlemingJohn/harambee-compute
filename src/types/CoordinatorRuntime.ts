@@ -24,4 +24,5 @@ export interface CoordinatorRuntime {
   modelId: string | null
   wallet: SparkWallet | null
   walletOpening: Promise<SparkWallet> | null
+  walletReading: Promise<{ address: string; balanceSats: number }> | null
 }
