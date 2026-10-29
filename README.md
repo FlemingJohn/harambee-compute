@@ -161,7 +161,16 @@ Then press **Approve** on the Devices screen, pick a model on the Model screen, 
 
 When Windows asks, allow Node.js on **private networks**.
 
-**Run the tests:** `npm test` (28 tests, including the encrypted pipe) and `npm run typecheck`.
+**Get test sats for payouts** (needs internet, once):
+```bash
+npm run fund
+```
+It prints the coordinator wallet's REGTEST deposit address. Paste it at the [Lightspark regtest faucet](https://app.lightspark.com/regtest-faucet), press **Send Funds**, then claim it with the transaction hash:
+```bash
+npm run fund -- --claim <transaction hash>
+```
+
+**Run the tests:** `npm test` (48 tests, including the encrypted pipe and every payout edge case) and `npm run typecheck`.
 
 ## Hardware, memory and models
 
@@ -185,6 +194,8 @@ Pre-existing, third-party work we build on: QVAC SDK and RPC server (Apache 2.0)
 - Helpers need the app installed. Students chatting from a phone browser is next on the list.
 - Payouts need REGTEST test sats in the coordinator wallet. Without them the payout is refused and stays queued, as tested.
 - A helper's answers cannot be verified, so only approve devices you trust.
+- Use the coordinator wallet only for Harambee payouts. A payout that lost its reply is matched against the wallet's own transfer history, so payments made from the same wallet in another app could confuse that check.
+- Each laptop's wallet seed lives in `.harambee/…/seed.txt`. Back it up before using real money; deleting the folder loses the wallet.
 
 ## License
 
