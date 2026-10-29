@@ -165,10 +165,7 @@ When Windows asks, allow Node.js on **private networks**.
 ```bash
 npm run fund
 ```
-It prints the coordinator wallet's REGTEST deposit address. Paste it at the [Lightspark regtest faucet](https://app.lightspark.com/regtest-faucet), press **Send Funds**, then claim it with the transaction hash:
-```bash
-npm run fund -- --claim <transaction hash>
-```
+It prints the coordinator wallet's REGTEST deposit address. Paste it at the [Lightspark regtest faucet](https://app.lightspark.com/regtest-faucet) and press **Send Funds**. Then run `npm run fund` again: it finds the faucet deposit, claims it into the Spark wallet and prints the balance. A specific deposit can also be claimed with `npm run fund -- --claim <transaction hash>`.
 
 **Run the tests:** `npm test` (48 tests, including the encrypted pipe and every payout edge case) and `npm run typecheck`.
 
