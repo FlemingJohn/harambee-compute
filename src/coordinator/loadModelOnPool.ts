@@ -1,9 +1,18 @@
+import { describeLoadError } from '../inference/describeLoadError.ts'
+import { listDownloadedModels } from '../inference/listDownloadedModels.ts'
 import { loadPoolModel } from '../inference/loadPoolModel.ts'
 import { modelCatalog } from '../inference/modelCatalog.ts'
 import { formatGigabytes } from '../lib/formatGigabytes.ts'
+import { TimeoutError } from '../lib/TimeoutError.ts'
+import { withTimeout } from '../lib/withTimeout.ts'
 import { allocateLayers } from '../pool/allocateLayers.ts'
 import { reservedBytesPerDevice } from '../pool/reservedBytesPerDevice.ts'
+import type { Allocation } from '../types/Allocation.ts'
+import type { CatalogModel } from '../types/CatalogModel.ts'
 import type { CoordinatorRuntime } from '../types/CoordinatorRuntime.ts'
+import { discardLateModel } from './discardLateModel.ts'
+import { findModelEndpoints } from './findModelEndpoints.ts'
+import { modelLoadTimeoutMs } from './modelLoadTimeoutMs.ts'
 import { unloadCurrentModel } from './unloadCurrentModel.ts'
 
 export async function loadModelOnPool(runtime: CoordinatorRuntime, modelName: string): Promise<void> {
@@ -18,11 +27,18 @@ export async function loadModelOnPool(runtime: CoordinatorRuntime, modelName: st
   }
   await unloadCurrentModel(runtime)
   runtime.store.update({ modelStatus: 'loading', modelMessage: `Loading ${model.name} across ${allocation.shares.length} devices` })
-  const endpoints = allocation.shares.map((share) => ({ url: runtime.helpers.get(share.deviceId)!.pipeUrl, layerCount: share.layerCount }))
+  await loadOrFail(runtime, model, allocation)
+}
+
+async function loadOrFail(runtime: CoordinatorRuntime, model: CatalogModel, allocation: Allocation): Promise<void> {
+  let loading: Promise<string> | null = null
   try {
-    runtime.modelId = await loadPoolModel(model.registryName, endpoints)
-    runtime.store.update({ modelStatus: 'ready', modelMessage: `${model.name} is ready on ${allocation.shares.length} devices` })
+    loading = loadPoolModel(model.registryName, findModelEndpoints(runtime, allocation.shares))
+    runtime.modelId = await withTimeout(loading, modelLoadTimeoutMs, 'Loading took too long. Check that every helper is still on the network.')
+    runtime.store.update({ modelStatus: 'ready', modelMessage: `${model.name} is ready on ${allocation.shares.length} devices`, downloadedModels: listDownloadedModels() })
   } catch (error) {
-    runtime.store.update({ modelStatus: 'failed', modelMessage: `Loading failed: ${(error as Error).message}` })
+    if (error instanceof TimeoutError && loading) discardLateModel(loading)
+    const isDownloaded = listDownloadedModels().includes(model.name)
+    runtime.store.update({ modelStatus: 'failed', modelMessage: describeLoadError(model.name, (error as Error).message, isDownloaded) })
   }
 }
