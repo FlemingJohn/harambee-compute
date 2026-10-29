@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Four live use cases. A school lab with no data bundle pools its PCs for a private AI. A cyber cafe lends idle PCs after closing and earns sats. The lesson keeps going when a PC switches off. A study group runs a bigger model than any one laptop can.">
+  <rect width="1200" height="720" rx="24" fill="#1A0B1E"/>
+  <text x="40" y="48" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="26" font-weight="800" fill="#FFF1E8">Where Harambee helps, live</text>
+  <text x="1160" y="48" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" fill="#C9A3B7">every step below is something the app does today</text>
+
+  <g>
+    <rect x="24" y="72" width="560" height="304" rx="20" fill="#26112B" stroke="#4A2A4E" stroke-width="1.5"/>
+    <rect x="48" y="96" width="512" height="160" rx="14" fill="#1F0D23"/>
+    <rect x="70" y="112" width="170" height="98" rx="8" fill="#233A2E" stroke="#3F6B4F" stroke-width="3"/>
+    <text x="155" y="142" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#8FD6A4">Photosynthesis</text>
+    <path d="M86 160h120M86 176h92M86 192h106" stroke="#8FD6A4" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="96" cy="232" r="11" fill="#7A3B2E"/><path d="M80 252c0-14 32-14 32 0z" fill="#3F6B4F"/>
+    <circle cx="136" cy="232" r="11" fill="#5C2E24"/><path d="M120 252c0-14 32-14 32 0z" fill="#3F6B4F"/>
+    <circle cx="176" cy="232" r="11" fill="#6B3426"/><path d="M160 252c0-14 32-14 32 0z" fill="#3F6B4F"/>
+    <rect x="208" y="214" width="152" height="30" rx="15" fill="#FFF1E8"/>
+    <path d="M214 240l-10 10 18-6z" fill="#FFF1E8"/>
+    <text x="284" y="234" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#2A0F1F">How do leaves eat?</text>
+    <g fill="#321838" stroke-width="2.5">
+      <rect x="300" y="116" width="64" height="42" rx="5" stroke="#FF8A3D"/><path d="M292 162h80l-6 7h-68z" stroke="#FF8A3D"/>
+      <rect x="388" y="116" width="64" height="42" rx="5" stroke="#FFD166"/><path d="M380 162h80l-6 7h-68z" stroke="#FFD166"/>
+      <rect x="476" y="116" width="64" height="42" rx="5" stroke="#D9558A"/><path d="M468 162h80l-6 7h-68z" stroke="#D9558A"/>
+    </g>
+    <path d="M310 130h44M310 140h44M398 130h44M486 130h44" stroke-width="5" stroke-linecap="round" stroke="#FF8A3D"/>
+    <path d="M398 130h44" stroke="#FFD166" stroke-width="5" stroke-linecap="round"/>
+    <path d="M486 130h44" stroke="#D9558A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M364 137h24M452 137h24" stroke="#FFD166" stroke-width="3" stroke-dasharray="3 5" stroke-linecap="round"/>
+    <rect x="490" y="194" width="34" height="54" rx="7" fill="#26112B" stroke="#8FD6A4" stroke-width="2.5"/>
+    <path d="M499 214a11 11 0 0 1 16 0M503 220a5 5 0 0 1 8 0" fill="none" stroke="#8FD6A4" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="530" cy="196" r="10" fill="#4D1E26" stroke="#FF5C5C" stroke-width="2"/><path d="M524 190l12 12" stroke="#FF5C5C" stroke-width="2.4" stroke-linecap="round"/>
+    <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+      <text x="48" y="292" font-size="21" font-weight="800" fill="#FFF1E8">School lab, data bundle finished</text>
+      <text x="48" y="320" font-size="16" fill="#C9A3B7">The lab PCs and the teacher's laptop pool their memory for a model</text>
+      <text x="48" y="342" font-size="16" fill="#C9A3B7">none of them could hold alone. Every question stays in the room.</text>
+      <text x="48" y="364" font-family="Consolas, Menlo, monospace" font-size="13" fill="#FF8A3D">QVAC layer split · Pears encrypted pipes · offline</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="616" y="72" width="560" height="304" rx="20" fill="#26112B" stroke="#4A2A4E" stroke-width="1.5"/>
+    <rect x="640" y="96" width="512" height="160" rx="14" fill="#1F0D23"/>
+    <path d="M690 118a20 20 0 1 0 22 26a16 16 0 1 1 -22 -26z" fill="#FFD166"/>
+    <text x="740" y="134" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#FFD166">after closing time</text>
+    <g fill="#321838" stroke="#C9A3B7" stroke-width="2.5">
+      <rect x="668" y="170" width="76" height="52" rx="6"/><rect x="760" y="170" width="76" height="52" rx="6"/><rect x="852" y="170" width="76" height="52" rx="6"/>
+    </g>
+    <path d="M694 222v14h24v-14M786 222v14h24v-14M878 222v14h24v-14" fill="none" stroke="#C9A3B7" stroke-width="2.5"/>
+    <path d="M682 188h48M682 200h36M774 188h48M774 200h36M866 188h48M866 200h36" stroke="#FFD166" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+    <g fill="#FFD166" stroke="#1A0B1E" stroke-width="2">
+      <circle cx="972" cy="200" r="11"/><circle cx="1004" cy="168" r="11"/><circle cx="1036" cy="140" r="11"/>
+    </g>
+    <path d="M940 210 C 980 190 1010 160 1050 130" fill="none" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/>
+    <rect x="1060" y="110" width="66" height="50" rx="9" fill="#46331F" stroke="#FFD166" stroke-width="2.5"/>
+    <path d="M1060 126h66M1108 142h8" stroke="#FFD166" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="1093" y="186" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="14" font-weight="700" fill="#FFD166">+ sats</text>
+    <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+      <text x="640" y="292" font-size="21" font-weight="800" fill="#FFF1E8">Idle PCs earn after closing</text>
+      <text x="640" y="320" font-size="16" fill="#C9A3B7">A cyber café or library lends its PCs to the pool and is paid in sats</text>
+      <text x="640" y="342" font-size="16" fill="#C9A3B7">for exactly the work its PCs did, as written in the ledger.</text>
+      <text x="640" y="364" font-family="Consolas, Menlo, monospace" font-size="13" fill="#FFD166">Hypercore ledger · WDK Spark payout · no fee</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="24" y="400" width="560" height="304" rx="20" fill="#26112B" stroke="#4A2A4E" stroke-width="1.5"/>
+    <rect x="48" y="424" width="512" height="160" rx="14" fill="#1F0D23"/>
+    <path d="M78 474 H170 A22 22 0 0 0 166 432 A32 32 0 0 0 108 424 A25 25 0 0 0 78 474 Z" fill="#26112B" stroke="#C9A3B7" stroke-width="2.5"/>
+    <path d="M78 428 L176 480" stroke="#FF5C5C" stroke-width="4" stroke-linecap="round"/>
+    <text x="126" y="504" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" fill="#C9A3B7">internet down</text>
+    <g fill="#321838" stroke-width="2.5">
+      <rect x="226" y="470" width="76" height="50" rx="6" stroke="#FF8A3D"/><path d="M218 524h92l-6 7h-80z" stroke="#FF8A3D"/>
+      <rect x="342" y="470" width="76" height="50" rx="6" stroke="#FFD166"/><path d="M334 524h92l-6 7h-80z" stroke="#FFD166"/>
+      <rect x="458" y="470" width="76" height="50" rx="6" stroke="#5C3760" opacity="0.6"/><path d="M450 524h92l-6 7h-80z" stroke="#5C3760" opacity="0.6"/>
+    </g>
+    <path d="M484 484l24 24M508 484l-24 24" stroke="#FF5C5C" stroke-width="4" stroke-linecap="round"/>
+    <g fill="#FF8A3D"><rect x="238" y="480" width="52" height="6" rx="2"/><rect x="238" y="490" width="52" height="6" rx="2"/><rect x="238" y="500" width="52" height="6" rx="2"/></g>
+    <g fill="#FFD166"><rect x="354" y="480" width="52" height="6" rx="2"/><rect x="354" y="490" width="52" height="6" rx="2"/><rect x="354" y="500" width="52" height="6" rx="2"/></g>
+    <path d="M490 458 C 470 432 400 432 384 458" fill="none" stroke="#8FD6A4" stroke-width="3" stroke-linecap="round"/>
+    <path d="M378 450l6 10 10-5" fill="none" stroke="#8FD6A4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="440" y="566" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="14" font-weight="700" fill="#8FD6A4">reloaded in seconds</text>
+    <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+      <text x="48" y="620" font-size="21" font-weight="800" fill="#FFF1E8">The lesson keeps going</text>
+      <text x="48" y="648" font-size="16" fill="#C9A3B7">No internet is needed for answers. If a PC is switched off, the pool</text>
+      <text x="48" y="670" font-size="16" fill="#C9A3B7">notices (13 s measured) and reloads on the PCs that are left.</text>
+      <text x="48" y="692" font-family="Consolas, Menlo, monospace" font-size="13" fill="#8FD6A4">recover on device loss · QVAC reload · Hyperswarm rejoin</text>
+    </g>
+  </g>
+
+  <g>
+    <rect x="616" y="400" width="560" height="304" rx="20" fill="#26112B" stroke="#4A2A4E" stroke-width="1.5"/>
+    <rect x="640" y="424" width="512" height="160" rx="14" fill="#1F0D23"/>
+    <g fill="#321838" stroke-width="2.5">
+      <rect x="664" y="446" width="72" height="46" rx="6" stroke="#FF8A3D"/><path d="M656 496h88l-6 7h-76z" stroke="#FF8A3D"/>
+      <rect x="664" y="520" width="72" height="46" rx="6" stroke="#FFD166"/><path d="M656 570h88l-6 7h-76z" stroke="#FFD166"/>
+      <rect x="1056" y="482" width="72" height="46" rx="6" stroke="#D9558A"/><path d="M1048 532h88l-6 7h-76z" stroke="#D9558A"/>
+    </g>
+    <g stroke="#1F0D23" stroke-width="2">
+      <rect x="836" y="440" width="120" height="13" rx="3" fill="#FF8A3D"/><rect x="836" y="455" width="120" height="13" rx="3" fill="#FF8A3D"/>
+      <rect x="836" y="470" width="120" height="13" rx="3" fill="#FF8A3D"/><rect x="836" y="485" width="120" height="13" rx="3" fill="#FFD166"/>
+      <rect x="836" y="500" width="120" height="13" rx="3" fill="#FFD166"/><rect x="836" y="515" width="120" height="13" rx="3" fill="#FFD166"/>
+      <rect x="836" y="530" width="120" height="13" rx="3" fill="#D9558A"/><rect x="836" y="545" width="120" height="13" rx="3" fill="#D9558A"/>
+    </g>
+    <text x="896" y="576" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="14" font-weight="700" fill="#FFD166">one bigger model</text>
+    <path d="M744 470 C 790 470 800 470 830 470M744 544 C 790 544 800 520 830 520M1048 505 C 1010 505 990 545 962 545" fill="none" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/>
+    <rect x="1046" y="440" width="92" height="28" rx="14" fill="#4A1F3A"/>
+    <text x="1092" y="459" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#F08AB0">+1 laptop</text>
+    <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+      <text x="640" y="620" font-size="21" font-weight="800" fill="#FFF1E8">A study group runs a smarter model</text>
+      <text x="640" y="648" font-size="16" fill="#C9A3B7">Friends' laptops hold one model none of them could run alone, and</text>
+      <text x="640" y="670" font-size="16" fill="#C9A3B7">the Model screen says when one more laptop unlocks a bigger one.</text>
+      <text x="640" y="692" font-family="Consolas, Menlo, monospace" font-size="13" fill="#FF8A3D">QVAC RPC memory read · planner advice · tensor-split</text>
+    </g>
+  </g>
+</svg>
