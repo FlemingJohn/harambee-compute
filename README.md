@@ -178,6 +178,10 @@ Then press **Approve** on the Devices screen, pick a model on the Model screen, 
 
 When Windows asks, allow Node.js on **private networks**.
 
+**Two tips from our own runs:**
+- On a laptop with little free memory, give QVAC more time to start: `QVAC_RPC_INIT_TIMEOUT_MS=240000 npm run coordinator -- …` (in PowerShell: `$env:QVAC_RPC_INIT_TIMEOUT_MS=240000` first). The same works for the helper.
+- Qwen3 0.6B fits on one laptop, so the planner would use only one. Add `--spread` to the coordinator to split it across every laptop for a demo, or pick a model that needs the pool.
+
 **Get test sats for payouts** (needs internet, once):
 ```bash
 npm run fund
@@ -194,6 +198,7 @@ It prints the coordinator wallet's REGTEST deposit address. Paste it at the [Lig
 | **Second laptop** | Windows, CPU only, 5.9 GB of memory seen by QVAC (helper) |
 | **Model used in the tests** | Qwen3 0.6B Q4 (`QWEN3_600M_INST_Q4`), 382 MB, 28 layers |
 | **Memory per device** | Qwen3 0.6B split 13 / 15 across the two laptops, about 0.2 GB each. The planner keeps 1 GB free on every device for its own apps |
+| **Memory used by the app** | measured while idle: coordinator 43 MB, helper 26 MB, QVAC worker 12 MB. With Qwen3 0.6B loaded, each device also holds about 0.2 GB of layers |
 | **Bigger models in the catalog** | Qwen3 1.7B (1.06 GB), Qwen3 4B (2.5 GB), Qwen3 8B (5.0 GB) |
 | **Model licences** | Qwen3: Apache 2.0. Llama 3.2 1B, used only in `spike/`: Llama 3.2 Community License |
 
