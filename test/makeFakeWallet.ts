@@ -9,16 +9,20 @@ export interface FakeWalletBehaviour {
   sendDelayMs: number
   refusal: string
   isReplyLost: boolean
+  isBalanceHanging: boolean
   finality: TransferFinality
 }
 
 export function makeFakeWallet(behaviour: Partial<FakeWalletBehaviour> = {}) {
-  const settings: FakeWalletBehaviour = { balanceSats: 1000, isOffline: false, sendDelayMs: 0, refusal: '', isReplyLost: false, finality: 'final', ...behaviour }
+  const settings: FakeWalletBehaviour = { balanceSats: 1000, isOffline: false, sendDelayMs: 0, refusal: '', isReplyLost: false, isBalanceHanging: false, finality: 'final', ...behaviour }
   const sent: { to: string; sats: number }[] = []
   const history: OutgoingTransfer[] = []
+  const calls = { balance: 0 }
   const wallet: SparkWallet = {
     getAddress: async () => 'sparkrt1coordinator',
     getBalanceSats: async () => {
+      calls.balance += 1
+      if (settings.isBalanceHanging) return new Promise<number>(() => undefined)
       if (settings.isOffline) throw new Error('fetch failed')
       return settings.balanceSats
     },
@@ -35,5 +39,5 @@ export function makeFakeWallet(behaviour: Partial<FakeWalletBehaviour> = {}) {
     getFinality: async () => settings.finality,
     dispose: () => {}
   }
-  return { wallet, settings, sent, history }
+  return { wallet, settings, sent, history, calls }
 }
