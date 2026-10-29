@@ -4,6 +4,7 @@ import { startRpcPipeClient } from '../network/startRpcPipeClient.ts'
 import type { CoordinatorRuntime } from '../types/CoordinatorRuntime.ts'
 import type { HelperHello } from '../types/HelperHello.ts'
 import type { PoolDevice } from '../types/PoolDevice.ts'
+import { isSupportedRpcProtocol } from '../pool/isSupportedRpcProtocol.ts'
 import { isRegtestSparkAddress } from '../wallet/isRegtestSparkAddress.ts'
 import { readInventoryWithRetry } from './readInventoryWithRetry.ts'
 import { refreshEarnings } from './refreshEarnings.ts'
@@ -22,6 +23,7 @@ export async function approveDevice(
   const pipe = await startRpcPipeClient(runtime.swarm.dht, runtime.swarm.keyPair, entry.hello.pipePublicKey)
   try {
     const inventory = await readInventoryWithRetry(pipe.url)
+    if (!isSupportedRpcProtocol(inventory.protocolVersion)) throw new Error(`its QVAC RPC version ${inventory.protocolVersion} does not match this coordinator. Update the app on that device`)
     runtime.helpers.set(deviceId, { hello: entry.hello, connection: entry.connection, pipeUrl: pipe.url, closePipe: pipe.close })
     runtime.approved.add(deviceId)
     if (entry.hello.selfToken === runtime.selfToken) runtime.selfDeviceId = deviceId
@@ -30,7 +32,7 @@ export async function approveDevice(
     console.log(`${entry.hello.name} joined the pool`)
   } catch (error) {
     pipe.close()
-    console.log(`Could not read memory from ${entry.hello.name}: ${(error as Error).message}`)
+    console.log(`Could not add ${entry.hello.name}: ${(error as Error).message}`)
   }
 }
 
