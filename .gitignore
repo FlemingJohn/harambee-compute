@@ -4,3 +4,6 @@ qvac/
 dist/
 .harambee/
 .vercel/
+
+.vercel
+.env*
