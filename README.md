@@ -17,7 +17,10 @@
   and we <b>pay every device that helps</b> in sats.
 </p>
 
-<p align="center"><b>Demo video (internet off):</b> [DEMO VIDEO LINK]</p>
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=vyQ_iX8WylQ"><img src="https://img.youtube.com/vi/vyQ_iX8WylQ/maxresdefault.jpg" alt="Watch the Harambee Compute demo video" width="720"></a><br>
+  <b><a href="https://www.youtube.com/watch?v=vyQ_iX8WylQ">▶ Watch the demo video (2:55)</a></b>
+</p>
 
 ---
 
