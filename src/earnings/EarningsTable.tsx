@@ -2,7 +2,7 @@ import { StatusPill } from '../components/StatusPill.tsx'
 import { getDeviceClass } from '../lib/getDeviceClass.ts'
 import type { Earning } from '../types/Earning.ts'
 
-export function EarningsTable({ earnings, deviceIds }: { earnings: Earning[]; deviceIds: string[] }) {
+export function EarningsTable({ earnings }: { earnings: Earning[] }) {
   return (
     <section aria-label="Earnings per device" className="card table-scroll device-table-card">
       <table className="device-table">
@@ -17,8 +17,8 @@ export function EarningsTable({ earnings, deviceIds }: { earnings: Earning[]; de
           </tr>
         </thead>
         <tbody>
-          {earnings.map((earning) => (
-            <tr key={earning.deviceId} className={getDeviceClass(Math.max(0, deviceIds.indexOf(earning.deviceId)))}>
+          {earnings.map((earning, position) => (
+            <tr key={earning.deviceId} className={getDeviceClass(position)}>
               <td><span className="row"><span className="device-swatch" /><strong>{earning.deviceName}</strong></span></td>
               <td className="mono">{earning.tokenLayers.toLocaleString('en')}</td>
               <td className={earning.isCoordinator ? 'muted' : 'mono text-gold'}>{earning.isCoordinator ? 'Not paid' : `${earning.sats} sats`}</td>
