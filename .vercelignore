@@ -1,0 +1,6 @@
+.harambee/
+qvac/
+node_modules/
+dist/
+*.log
+.vercel/
