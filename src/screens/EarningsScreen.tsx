@@ -1,33 +1,27 @@
 import { AppScreen } from '../components/AppScreen.tsx'
+import { NotConnectedScreen } from '../components/NotConnectedScreen.tsx'
 import { ScreenTitle } from '../components/ScreenTitle.tsx'
 import { EarningsSummary } from '../earnings/EarningsSummary.tsx'
 import { EarningsTable } from '../earnings/EarningsTable.tsx'
 import { LedgerCard } from '../earnings/LedgerCard.tsx'
 import { PayoutCard } from '../earnings/PayoutCard.tsx'
 import { useCoordinator } from '../hooks/useCoordinator.ts'
-import { sampleDevices } from '../sample/sampleDevices.ts'
-import { sampleEarnings } from '../sample/sampleEarnings.ts'
-import { sampleLedger } from '../sample/sampleLedger.ts'
-
-const sampleWallet = { address: '', balanceSats: 50000, isOnline: false, lastError: '' }
-const sampleNotice = { text: '', isError: false }
 
 export function EarningsScreen() {
   const { state, send } = useCoordinator()
-  const earnings = state?.earnings ?? sampleEarnings
-  const wallet = state?.wallet ?? sampleWallet
+  if (!state) return <NotConnectedScreen route="earnings" />
+  const { earnings, wallet } = state
   const queuedSats = earnings.reduce((sum, earning) => sum + earning.sats, 0)
-  const deviceIds = (state?.devices ?? sampleDevices).map((device) => device.id)
   return (
     <AppScreen route="earnings">
       <ScreenTitle route="earnings" title="Earnings">
         Helpers are paid for the work their layers did, with a WDK Spark wallet.
       </ScreenTitle>
       <EarningsSummary wallet={wallet} queuedSats={queuedSats} helperCount={earnings.filter((earning) => !earning.isCoordinator).length} />
-      <EarningsTable earnings={earnings} deviceIds={deviceIds} />
+      <EarningsTable earnings={earnings} deviceIds={state.devices.map((device) => device.id)} />
       <div className="columns columns--top">
-        <LedgerCard entries={state?.ledger ?? sampleLedger} />
-        <PayoutCard queuedSats={queuedSats} isOnline={wallet.isOnline} isPaying={state?.isPaying ?? false} notice={state?.payoutNotice ?? sampleNotice} onSend={() => send({ type: 'send-payouts' })} />
+        <LedgerCard entries={state.ledger} />
+        <PayoutCard queuedSats={queuedSats} isOnline={wallet.isOnline} isPaying={state.isPaying} notice={state.payoutNotice} onSend={() => send({ type: 'send-payouts' })} />
       </div>
     </AppScreen>
   )
