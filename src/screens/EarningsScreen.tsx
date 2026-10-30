@@ -18,7 +18,7 @@ export function EarningsScreen() {
         Helpers are paid for the work their layers did, with a WDK Spark wallet.
       </ScreenTitle>
       <EarningsSummary wallet={wallet} queuedSats={queuedSats} helperCount={earnings.filter((earning) => !earning.isCoordinator).length} />
-      <EarningsTable earnings={earnings} deviceIds={state.devices.map((device) => device.id)} />
+      <EarningsTable earnings={earnings} />
       <div className="columns columns--top">
         <LedgerCard entries={state.ledger} />
         <PayoutCard queuedSats={queuedSats} isOnline={wallet.isOnline} isPaying={state.isPaying} notice={state.payoutNotice} onSend={() => send({ type: 'send-payouts' })} />
