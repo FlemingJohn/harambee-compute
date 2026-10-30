@@ -26,7 +26,7 @@ export async function loadModelOnPool(runtime: CoordinatorRuntime, modelName: st
     return
   }
   await unloadCurrentModel(runtime)
-  runtime.store.update({ modelStatus: 'loading', modelMessage: `Loading ${model.name} across ${allocation.shares.length} devices` })
+  runtime.store.update({ modelStatus: 'loading', modelMessage: `Loading ${model.name} across ${countDevices(allocation)}` })
   await loadOrFail(runtime, model, allocation)
 }
 
@@ -35,10 +35,15 @@ async function loadOrFail(runtime: CoordinatorRuntime, model: CatalogModel, allo
   try {
     loading = loadPoolModel(model.registryName, findModelEndpoints(runtime, allocation.shares))
     runtime.modelId = await withTimeout(loading, modelLoadTimeoutMs, 'Loading took too long. Check that every helper is still on the network.')
-    runtime.store.update({ modelStatus: 'ready', modelMessage: `${model.name} is ready on ${allocation.shares.length} devices`, downloadedModels: listDownloadedModels() })
+    runtime.store.update({ modelStatus: 'ready', modelMessage: `${model.name} is ready on ${countDevices(allocation)}`, downloadedModels: listDownloadedModels() })
   } catch (error) {
     if (error instanceof TimeoutError && loading) discardLateModel(loading)
     const isDownloaded = listDownloadedModels().includes(model.name)
     runtime.store.update({ modelStatus: 'failed', modelMessage: describeLoadError(model.name, (error as Error).message, isDownloaded) })
   }
+}
+
+function countDevices(allocation: Allocation): string {
+  const count = allocation.shares.length
+  return `${count} ${count === 1 ? 'device' : 'devices'}`
 }
