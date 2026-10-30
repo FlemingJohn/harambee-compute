@@ -190,6 +190,8 @@ npm run fund
 ```
 It prints the coordinator wallet's REGTEST deposit address. Paste it at the [Lightspark regtest faucet](https://app.lightspark.com/regtest-faucet) and press **Send Funds**. Then run `npm run fund` again: it finds the faucet deposit, claims it into the Spark wallet and prints the balance. A specific deposit can also be claimed with `npm run fund -- --claim <transaction hash>`.
 
+**Website on Vercel:** the repo includes a [`vercel.json`](vercel.json). Import the repo on Vercel and it builds the screens only, installing just the 8 packages they need instead of the QVAC engines ([`deploy/installScreenPackages.mjs`](deploy/installScreenPackages.mjs)). The landing page works there for anyone. The pool screens show live data only on the coordinator laptop, at `http://127.0.0.1:8080`, because the AI runs on the laptops and never in the cloud.
+
 **Run the tests:** `npm test` (48 tests, including the encrypted pipe and every payout edge case) and `npm run typecheck`.
 
 ## Hardware, memory and models
